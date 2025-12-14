@@ -1,0 +1,1348 @@
+package ru.lama.expertCookingSystem.drools.rules.session
+
+import ru.lama.expertCookingSystem.drools.facts.SessionFact;
+import ru.lama.expertCookingSystem.drools.facts.AnswerFact;
+import ru.lama.expertCookingSystem.drools.facts.QuestionFact;
+import ru.lama.expertCookingSystem.drools.facts.UserPreferencesFact;
+
+import java.util.Arrays;
+import java.util.List;
+
+// ========== ГЛАВНЫЙ ВОПРОС ==========
+rule "Initialize First Question - Exotic Preference"
+    when
+        $session: SessionFact(currentState == "INITIAL")
+    then
+        $session.setCurrentState("exotic_preference");
+        $session.setProgress(0);
+        insert(new QuestionFact(
+            "exotic_preference",
+            "У вас есть желание попробовать экзотический рецепт?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+// ========== ЭКЗОТИЧЕСКАЯ ВЕТКА ==========
+
+rule "Process Exotic Preference - No"
+    when
+        $answer: AnswerFact(questionId == "exotic_preference", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "exotic_preference")
+    then
+        $session.setCurrentState("cooking_time");
+        $session.setProgress(10);
+        insert(new QuestionFact(
+            "cooking_time",
+            "Время готовки <30 мин?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+// Базовое правило для аллергии на цитрусовые
+rule "Process Citrus Allergy - Basic"
+    when
+        $answer: AnswerFact(questionId == "citrus_allergy")
+        $session: SessionFact(currentState == "citrus_allergy")
+    then
+        System.out.println("Базовое правило: получен ответ на аллергию цитрусовые");
+        // Основная логика в skip.drl
+end
+
+// Базовое правило для непереносимости лактозы
+rule "Process Lactose Intolerance - Basic"
+    when
+        $answer: AnswerFact(questionId == "lactose_intolerance")
+        $session: SessionFact(currentState == "lactose_intolerance")
+    then
+        System.out.println("Базовое правило: получен ответ на непереносимость лактозы");
+        // Основная логика в skip.drl
+end
+
+rule "Process Seafood Allergy - Basic"
+    when
+        $answer: AnswerFact(questionId == "seafood_allergy")
+        $session: SessionFact(currentState == "seafood_allergy")
+    then
+        System.out.println("Базовое правило: получен ответ на аллергию морепродукты");
+        // Основная логика в skip.drl
+end
+
+rule "Process Truffle Oil - Yes"
+    when
+        $answer: AnswerFact(questionId == "truffle_oil", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "truffle_oil")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(41L); // Французский рататуй с трюфельным маслом
+        $session.setRecommendedRecipeName("Французский рататуй с трюфельным маслом");
+end
+
+rule "Process Truffle Oil - No"
+    when
+        $answer: AnswerFact(questionId == "truffle_oil", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "truffle_oil")
+    then
+        $session.setCurrentState("matcha");
+        $session.setProgress(50);
+        insert(new QuestionFact(
+            "matcha",
+            "В блюде есть матча?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Matcha - Yes"
+    when
+        $answer: AnswerFact(questionId == "matcha", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "matcha")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(40L); // Японские моти с зеленым чаем
+        $session.setRecommendedRecipeName("Японские моти с зеленым чаем");
+end
+
+rule "Process Matcha - No"
+    when
+        $answer: AnswerFact(questionId == "matcha", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "matcha")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(46L); // Мороженое из жидкого азота
+        $session.setRecommendedRecipeName("Мороженое из жидкого азота");
+end
+
+// Базовое правило для аллергии на арахис
+rule "Process Peanut Allergy - Basic"
+    when
+        $answer: AnswerFact(questionId == "peanut_allergy")
+        $session: SessionFact(currentState == "peanut_allergy")
+    then
+        System.out.println("Базовое правило: получен ответ на аллергию арахис");
+        // Основная логика в skip.drl
+end
+
+// Базовое правило для аллергии на орехи
+rule "Process Nut Allergy - Basic"
+    when
+        $answer: AnswerFact(questionId == "nut_allergy")
+        $session: SessionFact(currentState == "nut_allergy")
+    then
+        System.out.println("Базовое правило: получен ответ на аллергию орехи");
+        // Основная логика в skip.drl
+end
+
+rule "Process Stracciatella - Yes"
+    when
+        $answer: AnswerFact(questionId == "stracciatella", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "stracciatella")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(43L); // Итальянская брускетта со страчателлой
+        $session.setRecommendedRecipeName("Итальянская брускетта со страчателлой");
+end
+
+rule "Process Stracciatella - No"
+    when
+        $answer: AnswerFact(questionId == "stracciatella", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "stracciatella")
+    then
+        $session.setCurrentState("marination");
+        $session.setProgress(50);
+        insert(new QuestionFact(
+            "marination",
+            "Нужна ли мариновка (>2 ч)?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Marination - Yes"
+    when
+        $answer: AnswerFact(questionId == "marination", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "marination")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(44L); // Греческий мусака
+        $session.setRecommendedRecipeName("Греческий мусака");
+end
+
+rule "Process Marination - No"
+    when
+        $answer: AnswerFact(questionId == "marination", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "marination")
+    then
+        $session.setCurrentState("lavender");
+        $session.setProgress(60);
+        insert(new QuestionFact(
+            "lavender",
+            "В блюде есть лаванда?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Lavender - Yes"
+    when
+        $answer: AnswerFact(questionId == "lavender", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "lavender")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(48L); // Крем-брюле с лавандой
+        $session.setRecommendedRecipeName("Крем-брюле с лавандой");
+end
+
+rule "Process Lavender - No"
+    when
+        $answer: AnswerFact(questionId == "lavender", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "lavender")
+    then
+        $session.setCurrentState("saffron");
+        $session.setProgress(70);
+        insert(new QuestionFact(
+            "saffron",
+            "В блюде есть шафран?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Saffron - Yes"
+    when
+        $answer: AnswerFact(questionId == "saffron", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "saffron")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(50L); // Панна-котта с шафраном
+        $session.setRecommendedRecipeName("Панна-котта с шафраном");
+end
+
+rule "Process Saffron - No"
+    when
+        $answer: AnswerFact(questionId == "saffron", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "saffron")
+    then
+        $session.setCurrentState("pink_salt");
+        $session.setProgress(80);
+        insert(new QuestionFact(
+            "pink_salt",
+            "В блюде есть розовая гималайская соль?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Pink Salt - Yes"
+    when
+        $answer: AnswerFact(questionId == "pink_salt", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "pink_salt")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(47L); // Чизкейк с розовой гималайской солью
+        $session.setRecommendedRecipeName("Чизкейк с розовой гималайской солью");
+end
+
+rule "Process Pink Salt - No"
+    when
+        $answer: AnswerFact(questionId == "pink_salt", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "pink_salt")
+    then
+        $session.setCurrentState("pink_matcha");
+        $session.setProgress(90);
+        insert(new QuestionFact(
+            "pink_matcha",
+            "В блюде есть розовая матча?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Pink Matcha - Yes"
+    when
+        $answer: AnswerFact(questionId == "pink_matcha", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "pink_matcha")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(49L); // Тирамису с матчей
+        $session.setRecommendedRecipeName("Тирамису с матчей");
+end
+
+rule "Process Pink Matcha - No"
+    when
+        $answer: AnswerFact(questionId == "pink_matcha", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "pink_matcha")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(51L); // Тирамису с ягодами
+        $session.setRecommendedRecipeName("Тирамису с ягодами");
+end
+
+rule "Process Oysters - Yes"
+    when
+        $answer: AnswerFact(questionId == "oysters", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "oysters")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(35L); // Устрицы с цитрусовым соусом
+        $session.setRecommendedRecipeName("Устрицы с цитрусовым соусом");
+end
+
+rule "Process Oysters - No"
+    when
+        $answer: AnswerFact(questionId == "oysters", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "oysters")
+    then
+        $session.setCurrentState("squid");
+        $session.setProgress(30);
+        insert(new QuestionFact(
+            "squid",
+            "В блюде есть кальмар?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Squid - Yes"
+    when
+        $answer: AnswerFact(questionId == "squid", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "squid")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(33L); // Кальмары в чернильном соусе
+        $session.setRecommendedRecipeName("Кальмары в чернильном соусе");
+end
+
+rule "Process Squid - No"
+    when
+        $answer: AnswerFact(questionId == "squid", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "squid")
+    then
+        $session.setCurrentState("soy_allergy");
+        $session.setProgress(40);
+        insert(new QuestionFact(
+            "soy_allergy",
+            "У вас аллергия на сою?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+// Базовое правило для аллергии на сою
+rule "Process Soy Allergy - Basic"
+    when
+        $answer: AnswerFact(questionId == "soy_allergy")
+        $session: SessionFact(currentState == "soy_allergy")
+    then
+        System.out.println("Базовое правило: получен ответ на аллергию сою");
+        // Основная логика в skip.drl
+end
+
+rule "Process Avocado - Yes"
+    when
+        $answer: AnswerFact(questionId == "avocado", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "avocado")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(31L); // Тартар из тунца с авокадо
+        $session.setRecommendedRecipeName("Тартар из тунца с авокадо");
+end
+
+rule "Process Avocado - No"
+    when
+        $answer: AnswerFact(questionId == "avocado", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "avocado")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(34L); // Севиче из лосося с лаймом
+        $session.setRecommendedRecipeName("Севиче из лосося с лаймом");
+end
+
+rule "Process Wasabi - Yes"
+    when
+        $answer: AnswerFact(questionId == "wasabi", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "wasabi")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(36L); // Рамен с яйцом пашот
+        $session.setRecommendedRecipeName("Рамен с яйцом пашот");
+end
+
+rule "Process Wasabi - No"
+    when
+        $answer: AnswerFact(questionId == "wasabi", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "wasabi")
+    then
+        $session.setCurrentState("sesame_allergy");
+        $session.setProgress(60);
+        insert(new QuestionFact(
+            "sesame_allergy",
+            "У вас есть аллергия на кунжут?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+// Базовое правило для аллергии на кунжут
+rule "Process Sesame Allergy - Basic"
+    when
+        $answer: AnswerFact(questionId == "sesame_allergy")
+        $session: SessionFact(currentState == "sesame_allergy")
+    then
+        System.out.println("Базовое правило: получен ответ на аллергию кунжут");
+        // Основная логика в skip.drl
+end
+
+rule "Process Duck - Yes"
+    when
+        $answer: AnswerFact(questionId == "duck", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "duck")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(39L); // Китайская утка по-пекински
+        $session.setRecommendedRecipeName("Китайская утка по-пекински");
+end
+
+rule "Process Duck - No"
+    when
+        $answer: AnswerFact(questionId == "duck", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "duck")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(38L); // Вьетнамский суп Фо Бо
+        $session.setRecommendedRecipeName("Вьетнамский суп Фо Бо");
+end
+
+// ========== ОБЫЧНАЯ ВЕТКА ==========
+
+rule "Process Cooking Time - Yes"
+    when
+        $answer: AnswerFact(questionId == "cooking_time", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "cooking_time")
+    then
+        $session.setCurrentState("dietary");
+        $session.setProgress(20);
+        insert(new QuestionFact(
+            "dietary",
+            "Блюдо диетическое?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Cooking Time - No"
+    when
+        $answer: AnswerFact(questionId == "cooking_time", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "cooking_time")
+    then
+        $session.setCurrentState("fish");
+        $session.setProgress(20);
+        insert(new QuestionFact(
+            "fish",
+            "В блюде есть рыба?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Dietary - Yes"
+    when
+        $answer: AnswerFact(questionId == "dietary", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "dietary")
+    then
+        $session.setCurrentState("breakfast");
+        $session.setProgress(30);
+        insert(new QuestionFact(
+            "breakfast",
+            "Это завтрак?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Dietary - No"
+    when
+        $answer: AnswerFact(questionId == "dietary", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "dietary")
+    then
+        $session.setCurrentState("meat");
+        $session.setProgress(30);
+        insert(new QuestionFact(
+            "meat",
+            "В блюде есть мясо?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Breakfast - Yes"
+    when
+        $answer: AnswerFact(questionId == "breakfast", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "breakfast")
+    then
+        $session.setCurrentState("flour");
+        $session.setProgress(40);
+        insert(new QuestionFact(
+            "flour",
+            "Нужна мука?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Breakfast - No"
+    when
+        $answer: AnswerFact(questionId == "breakfast", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "breakfast")
+    then
+        $session.setCurrentState("vegetarian");
+        $session.setProgress(40);
+        insert(new QuestionFact(
+            "vegetarian",
+            "Блюдо вегетерианское?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Flour - Yes"
+    when
+        $answer: AnswerFact(questionId == "flour", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "flour")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(28L); // Сырники
+        $session.setRecommendedRecipeName("Сырники");
+end
+
+rule "Process Flour - No"
+    when
+        $answer: AnswerFact(questionId == "flour", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "flour")
+    then
+        $session.setCurrentState("eggs");
+        $session.setProgress(50);
+        insert(new QuestionFact(
+            "eggs",
+            "В блюде есть яйца?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Eggs - Yes"
+    when
+        $answer: AnswerFact(questionId == "eggs", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "eggs")
+    then
+        $session.setCurrentState("milk");
+        $session.setProgress(60);
+        insert(new QuestionFact(
+            "milk",
+            "В состав входит молоко?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Eggs - No"
+    when
+        $answer: AnswerFact(questionId == "eggs", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "eggs")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(2L); // Овсяная каша
+        $session.setRecommendedRecipeName("Овсяная каша");
+end
+
+rule "Process Milk - Yes"
+    when
+        $answer: AnswerFact(questionId == "milk", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "milk")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(1L); // Омлет классический
+        $session.setRecommendedRecipeName("Омлет классический");
+end
+
+rule "Process Milk - No"
+    when
+        $answer: AnswerFact(questionId == "milk", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "milk")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(4L); // Яичница глазунья
+        $session.setRecommendedRecipeName("Яичница глазунья");
+end
+
+rule "Process Vegetarian - Yes"
+    when
+        $answer: AnswerFact(questionId == "vegetarian", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "vegetarian")
+    then
+        $session.setCurrentState("fresh_vegetables");
+        $session.setProgress(50);
+        insert(new QuestionFact(
+            "fresh_vegetables",
+            "В блюде есть свежие овощи?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Vegetarian - No"
+    when
+        $answer: AnswerFact(questionId == "vegetarian", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "vegetarian")
+    then
+        $session.setCurrentState("snack");
+        $session.setProgress(50);
+        insert(new QuestionFact(
+            "snack",
+            "Это перекус?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Fresh Vegetables - Yes"
+    when
+        $answer: AnswerFact(questionId == "fresh_vegetables", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "fresh_vegetables")
+    then
+        $session.setCurrentState("olives");
+        $session.setProgress(60);
+        insert(new QuestionFact(
+            "olives",
+            "В блюде есть оливки?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Fresh Vegetables - No"
+    when
+        $answer: AnswerFact(questionId == "fresh_vegetables", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "fresh_vegetables")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(18L); // Овощное рагу
+        $session.setRecommendedRecipeName("Овощное рагу");
+end
+
+rule "Process Olives - Yes"
+    when
+        $answer: AnswerFact(questionId == "olives", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "olives")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(25L); // Греческий салат
+        $session.setRecommendedRecipeName("Греческий салат");
+end
+
+rule "Process Olives - No"
+    when
+        $answer: AnswerFact(questionId == "olives", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "olives")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(23L); // Овощной салат
+        $session.setRecommendedRecipeName("Овощной салат");
+end
+
+rule "Process Snack - Yes"
+    when
+        $answer: AnswerFact(questionId == "snack", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "snack")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(22L); // Цезарь с курицей
+        $session.setRecommendedRecipeName("Цезарь с курицей");
+end
+
+rule "Process Snack - No"
+    when
+        $answer: AnswerFact(questionId == "snack", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "snack")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(13L); // Гречка с тушенкой
+        $session.setRecommendedRecipeName("Гречка с тушенкой");
+end
+
+rule "Process Meat - Yes"
+    when
+        $answer: AnswerFact(questionId == "meat", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "meat")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(15L); // Бефстроганов
+        $session.setRecommendedRecipeName("Бефстроганов");
+end
+
+rule "Process Meat - No"
+    when
+        $answer: AnswerFact(questionId == "meat", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "meat")
+    then
+        $session.setCurrentState("soup");
+        $session.setProgress(40);
+        insert(new QuestionFact(
+            "soup",
+            "Это суп?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Fish - Yes"
+    when
+        $answer: AnswerFact(questionId == "fish", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "fish")
+    then
+        $session.setCurrentState("complex_dish");
+        $session.setProgress(30);
+        insert(new QuestionFact(
+            "complex_dish",
+            "Это сложное блюдо?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Fish - No"
+    when
+        $answer: AnswerFact(questionId == "fish", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "fish")
+    then
+        $session.setCurrentState("oven");
+        $session.setProgress(30);
+        insert(new QuestionFact(
+            "oven",
+            "Нужна духовка?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Complex Dish - Yes"
+    when
+        $answer: AnswerFact(questionId == "complex_dish", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "complex_dish")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(16L); // Рыба в кляре
+        $session.setRecommendedRecipeName("Рыба в кляре");
+end
+
+rule "Process Complex Dish - No"
+    when
+        $answer: AnswerFact(questionId == "complex_dish", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "complex_dish")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(24L); // Селедка под шубой
+        $session.setRecommendedRecipeName("Селедка под шубой");
+end
+
+rule "Process Oven - Yes"
+    when
+        $answer: AnswerFact(questionId == "oven", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "oven")
+    then
+        $session.setCurrentState("apples");
+        $session.setProgress(40);
+        insert(new QuestionFact(
+            "apples",
+            "В блюде есть яблоки?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Oven - No"
+    when
+        $answer: AnswerFact(questionId == "oven", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "oven")
+    then
+        $session.setCurrentState("cold_dish");
+        $session.setProgress(40);
+        insert(new QuestionFact(
+            "cold_dish",
+            "Блюдо холодное?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Apples - Yes"
+    when
+        $answer: AnswerFact(questionId == "apples", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "apples")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(26L); // Шарлотка
+        $session.setRecommendedRecipeName("Шарлотка");
+end
+
+rule "Process Apples - No"
+    when
+        $answer: AnswerFact(questionId == "apples", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "apples")
+    then
+        $session.setCurrentState("cottage_cheese");
+        $session.setProgress(50);
+        insert(new QuestionFact(
+            "cottage_cheese",
+            "В блюде есть творог?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Cottage Cheese - Yes"
+    when
+        $answer: AnswerFact(questionId == "cottage_cheese", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "cottage_cheese")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(5L); // Творожная запеканка
+        $session.setRecommendedRecipeName("Творожная запеканка");
+end
+
+rule "Process Cottage Cheese - No"
+    when
+        $answer: AnswerFact(questionId == "cottage_cheese", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "cottage_cheese")
+    then
+        $session.setCurrentState("chicken");
+        $session.setProgress(60);
+        insert(new QuestionFact(
+            "chicken",
+            "В блюде есть курица?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Chicken - Yes"
+    when
+        $answer: AnswerFact(questionId == "chicken", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "chicken")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(12L); // Котлеты куриные
+        $session.setRecommendedRecipeName("Котлеты куриные");
+end
+
+rule "Process Chicken - No"
+    when
+        $answer: AnswerFact(questionId == "chicken", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "chicken")
+    then
+        $session.setCurrentState("custard");
+        $session.setProgress(70);
+        insert(new QuestionFact(
+            "custard",
+            "Нравится заварной крем?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Custard - Yes"
+    when
+        $answer: AnswerFact(questionId == "custard", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "custard")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(27L); // Торт Наполеон
+        $session.setRecommendedRecipeName("Торт Наполеон");
+end
+
+rule "Process Custard - No"
+    when
+        $answer: AnswerFact(questionId == "custard", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "custard")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(29L); // Печенье овсяное
+        $session.setRecommendedRecipeName("Печенье овсяное");
+end
+
+rule "Process Cold Dish - Yes"
+    when
+        $answer: AnswerFact(questionId == "cold_dish", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "cold_dish")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(21L); // Салат Оливье
+        $session.setRecommendedRecipeName("Салат Оливье");
+end
+
+rule "Process Cold Dish - No"
+    when
+        $answer: AnswerFact(questionId == "cold_dish", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "cold_dish")
+    then
+        $session.setCurrentState("beet");
+        $session.setProgress(50);
+        insert(new QuestionFact(
+            "beet",
+            "Блюдо содержит свеклу?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Beet - Yes"
+    when
+        $answer: AnswerFact(questionId == "beet", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "beet")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(6L); // Борщ
+        $session.setRecommendedRecipeName("Борщ");
+end
+
+rule "Process Beet - No"
+    when
+        $answer: AnswerFact(questionId == "beet", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "beet")
+    then
+        $session.setCurrentState("mushrooms");
+        $session.setProgress(60);
+        insert(new QuestionFact(
+            "mushrooms",
+            "Блюдо содержит грибы?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Mushrooms - Yes"
+    when
+        $answer: AnswerFact(questionId == "mushrooms", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "mushrooms")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(8L); // Грибной крем-суп
+        $session.setRecommendedRecipeName("Грибной крем-суп");
+end
+
+rule "Process Mushrooms - No"
+    when
+        $answer: AnswerFact(questionId == "mushrooms", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "mushrooms")
+    then
+        $session.setCurrentState("peeler");
+        $session.setProgress(70);
+        insert(new QuestionFact(
+            "peeler",
+            "Есть овощечистка?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Peeler - Yes"
+    when
+        $answer: AnswerFact(questionId == "peeler", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "peeler")
+    then
+        $session.setCurrentState("pickles");
+        $session.setProgress(80);
+        insert(new QuestionFact(
+            "pickles",
+            "Блюдо содержит маринованные огурцы?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Peeler - No"
+    when
+        $answer: AnswerFact(questionId == "peeler", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "peeler")
+    then
+        $session.setCurrentState("rice");
+        $session.setProgress(80);
+        insert(new QuestionFact(
+            "rice",
+            "Блюдо содержит рис?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Pickles - Yes"
+    when
+        $answer: AnswerFact(questionId == "pickles", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "pickles")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(9L); // Солянка
+        $session.setRecommendedRecipeName("Солянка");
+end
+
+rule "Process Pickles - No"
+    when
+        $answer: AnswerFact(questionId == "pickles", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "pickles")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(20L); // Картофельное пюре
+        $session.setRecommendedRecipeName("Картофельное пюре");
+end
+
+rule "Process Rice - Yes"
+    when
+        $answer: AnswerFact(questionId == "rice", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "rice")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(11L); // Плов из свинины
+        $session.setRecommendedRecipeName("Плов из свинины");
+end
+
+rule "Process Rice - No"
+    when
+        $answer: AnswerFact(questionId == "rice", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "rice")
+    then
+        $session.setCurrentState("noodles");
+        $session.setProgress(90);
+        insert(new QuestionFact(
+            "noodles",
+            "Есть вермишель?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Noodles - Yes"
+    when
+        $answer: AnswerFact(questionId == "noodles", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "noodles")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(7L); // Куриный суп с лапшой
+        $session.setRecommendedRecipeName("Куриный суп с лапшой");
+end
+
+rule "Process Noodles - No"
+    when
+        $answer: AnswerFact(questionId == "noodles", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "noodles")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(14L); // Гуляш
+        $session.setRecommendedRecipeName("Гуляш");
+end
+
+rule "Process Soup - Yes"
+    when
+        $answer: AnswerFact(questionId == "soup", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "soup")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(10L); // Окрошка
+        $session.setRecommendedRecipeName("Окрошка");
+end
+
+rule "Process Soup - No"
+    when
+        $answer: AnswerFact(questionId == "soup", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "soup")
+    then
+        $session.setCurrentState("dessert");
+        $session.setProgress(50);
+        insert(new QuestionFact(
+            "dessert",
+            "Это десерт?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Dessert - Yes"
+    when
+        $answer: AnswerFact(questionId == "dessert", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "dessert")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(30L); // Вафли
+        $session.setRecommendedRecipeName("Вафли");
+end
+
+rule "Process Dessert - No"
+    when
+        $answer: AnswerFact(questionId == "dessert", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "dessert")
+    then
+        $session.setCurrentState("special_occasion");
+        $session.setProgress(60);
+        insert(new QuestionFact(
+            "special_occasion",
+            "Особый случай/праздник?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Special Occasion - Yes"
+    when
+        $answer: AnswerFact(questionId == "special_occasion", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "special_occasion")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(17L); // Жареная картошка
+        $session.setRecommendedRecipeName("Жареная картошка");
+end
+
+rule "Process Special Occasion - No"
+    when
+        $answer: AnswerFact(questionId == "special_occasion", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "special_occasion")
+    then
+        $session.setCurrentState("dinner");
+        $session.setProgress(70);
+        insert(new QuestionFact(
+            "dinner",
+            "Это ужин?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end
+
+rule "Process Dinner - Yes"
+    when
+        $answer: AnswerFact(questionId == "dinner", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "dinner")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(19L); // Макароны с сыром
+        $session.setRecommendedRecipeName("Макароны с сыром");
+end
+
+rule "Process Dinner - No"
+    when
+        $answer: AnswerFact(questionId == "dinner", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "dinner")
+    then
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(3L); // Блинчики
+        $session.setRecommendedRecipeName("Блинчики");
+end

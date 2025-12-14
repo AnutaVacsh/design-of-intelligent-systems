@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: 010-create-preference-questions-table
+      author: lama
+      changes:
+        - createTable:
+            tableName: preference_questions
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: field_name
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: question_text
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: question_type
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sort_order
+                  type: INT
+                  defaultValue: 0
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP

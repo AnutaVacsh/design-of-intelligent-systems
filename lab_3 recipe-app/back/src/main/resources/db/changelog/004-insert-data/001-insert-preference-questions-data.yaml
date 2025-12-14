@@ -1,0 +1,812 @@
+databaseChangeLog:
+  - changeSet:
+      id: 012-insert-preference-questions-data
+      author: lama
+      changes:
+        - insert:
+            tableName: preference_questions
+            columns:
+              - column:
+                  name: field_name
+                  value: diet_type
+              - column:
+                  name: question_text
+                  value: Какой тип питания вы предпочитаете?
+              - column:
+                  name: question_type
+                  value: SINGLE
+              - column:
+                  name: sort_order
+                  value: 1
+
+        - insert:
+            tableName: preference_questions
+            columns:
+              - column:
+                  name: field_name
+                  value: allergies
+              - column:
+                  name: question_text
+                  value: Есть ли у вас аллергии или непереносимости?
+              - column:
+                  name: question_type
+                  value: MULTIPLE
+              - column:
+                  name: sort_order
+                  value: 2
+
+        - insert:
+            tableName: preference_questions
+            columns:
+              - column:
+                  name: field_name
+                  value: excluded_ingredients
+              - column:
+                  name: question_text
+                  value: Какие ингредиенты не любите или исключаете?
+              - column:
+                  name: question_type
+                  value: MULTIPLE
+              - column:
+                  name: sort_order
+                  value: 3
+
+  - changeSet:
+      id: 012-insert-diet-type-options
+      author: lama
+      changes:
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'diet_type')
+              - column:
+                  name: option_key
+                  value: vegetarian
+              - column:
+                  name: option_text
+                  value: Вегетарианское
+              - column:
+                  name: emoji
+                  value: "🥗"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 1
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'diet_type')
+              - column:
+                  name: option_key
+                  value: vegan
+              - column:
+                  name: option_text
+                  value: Веганское
+              - column:
+                  name: emoji
+                  value: "🌱"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 2
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'diet_type')
+              - column:
+                  name: option_key
+                  value: regular
+              - column:
+                  name: option_text
+                  value: Обычное (без ограничений)
+              - column:
+                  name: emoji
+                  value: "🍖"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 3
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'diet_type')
+              - column:
+                  name: option_key
+                  value: no_preference
+              - column:
+                  name: option_text
+                  value: Без предпочтений
+              - column:
+                  name: emoji
+                  value: "🤷"
+              - column:
+                  name: is_default
+                  value: true
+              - column:
+                  name: sort_order
+                  value: 4
+
+  - changeSet:
+      id: 012-insert-allergies-options
+      author: lama
+      changes:
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'allergies')
+              - column:
+                  name: option_key
+                  value: nuts
+              - column:
+                  name: option_text
+                  value: Орехи/арахис
+              - column:
+                  name: emoji
+                  value: "🌰"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 1
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'allergies')
+              - column:
+                  name: option_key
+                  value: lactose
+              - column:
+                  name: option_text
+                  value: Лактоза/молочные продукты
+              - column:
+                  name: emoji
+                  value: "🥛"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 2
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'allergies')
+              - column:
+                  name: option_key
+                  value: seafood_fish
+              - column:
+                  name: option_text
+                  value: Рыба
+              - column:
+                  name: emoji
+                  value: "🐟"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 3
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'allergies')
+              - column:
+                  name: option_key
+                  value: seafood_shellfish
+              - column:
+                  name: option_text
+                  value: Морепродукты (креветки, мидии)
+              - column:
+                  name: emoji
+                  value: "🦐"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 4
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'allergies')
+              - column:
+                  name: option_key
+                  value: citrus
+              - column:
+                  name: option_text
+                  value: Цитрусовые
+              - column:
+                  name: emoji
+                  value: "🍊"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 5
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'allergies')
+              - column:
+                  name: option_key
+                  value: gluten
+              - column:
+                  name: option_text
+                  value: Глютен
+              - column:
+                  name: emoji
+                  value: "🌾"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 6
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'allergies')
+              - column:
+                  name: option_key
+                  value: soy
+              - column:
+                  name: option_text
+                  value: Соя
+              - column:
+                  name: emoji
+                  value: "🫘"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 7
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'allergies')
+              - column:
+                  name: option_key
+                  value: sesame
+              - column:
+                  name: option_text
+                  value: Кунжут
+              - column:
+                  name: emoji
+                  value: "🎯"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 8
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'allergies')
+              - column:
+                  name: option_key
+                  value: eggs
+              - column:
+                  name: option_text
+                  value: Яйца
+              - column:
+                  name: emoji
+                  value: "🥚"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 9
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'allergies')
+              - column:
+                  name: option_key
+                  value: NO_ALLERGIES
+              - column:
+                  name: option_text
+                  value: Нет аллергий
+              - column:
+                  name: emoji
+                  value: "❌"
+              - column:
+                  name: is_default
+                  value: true
+              - column:
+                  name: sort_order
+                  value: 10
+
+  - changeSet:
+      id: 012-insert-excluded-ingredients-options
+      author: lama
+      changes:
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: mushrooms
+              - column:
+                  name: option_text
+                  value: Грибы
+              - column:
+                  name: emoji
+                  value: "🍄"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 1
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: onion
+              - column:
+                  name: option_text
+                  value: Лук
+              - column:
+                  name: emoji
+                  value: "🧅"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 2
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: olives
+              - column:
+                  name: option_text
+                  value: Оливки
+              - column:
+                  name: emoji
+                  value: "🫒"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 3
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: pickles
+              - column:
+                  name: option_text
+                  value: Маринованные огурцы
+              - column:
+                  name: emoji
+                  value: "🥒"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 4
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: beetroot
+              - column:
+                  name: option_text
+                  value: Свекла
+              - column:
+                  name: emoji
+                  value: "🥬"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 5
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: avocado
+              - column:
+                  name: option_text
+                  value: Авокадо
+              - column:
+                  name: emoji
+                  value: "🥑"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 6
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: truffle
+              - column:
+                  name: option_text
+                  value: Трюфели
+              - column:
+                  name: emoji
+                  value: "🍄"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 7
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: lavender
+              - column:
+                  name: option_text
+                  value: Лаванда
+              - column:
+                  name: emoji
+                  value: "💜"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 8
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: saffron
+              - column:
+                  name: option_text
+                  value: Шафран
+              - column:
+                  name: emoji
+                  value: "🧡"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 9
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: matcha
+              - column:
+                  name: option_text
+                  value: Матча
+              - column:
+                  name: emoji
+                  value: "🍵"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 10
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: pink_salt
+              - column:
+                  name: option_text
+                  value: Розовая гималайская соль
+              - column:
+                  name: emoji
+                  value: "🧂"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 11
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: cottage_cheese
+              - column:
+                  name: option_text
+                  value: Творог
+              - column:
+                  name: emoji
+                  value: "🧀"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 12
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: apples
+              - column:
+                  name: option_text
+                  value: Яблоки
+              - column:
+                  name: emoji
+                  value: "🍎"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 13
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: rice
+              - column:
+                  name: option_text
+                  value: Рис
+              - column:
+                  name: emoji
+                  value: "🍚"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 14
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: chicken
+              - column:
+                  name: option_text
+                  value: Курица
+              - column:
+                  name: emoji
+                  value: "🍗"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 15
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: duck
+              - column:
+                  name: option_text
+                  value: Утка
+              - column:
+                  name: emoji
+                  value: "🦆"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 16
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: squid
+              - column:
+                  name: option_text
+                  value: Кальмары
+              - column:
+                  name: emoji
+                  value: "🦑"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 17
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: oysters
+              - column:
+                  name: option_text
+                  value: Устрицы
+              - column:
+                  name: emoji
+                  value: "🦪"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 18
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: wasabi
+              - column:
+                  name: option_text
+                  value: Васаби
+              - column:
+                  name: emoji
+                  value: "💚"
+              - column:
+                  name: is_default
+                  value: false
+              - column:
+                  name: sort_order
+                  value: 19
+
+        - insert:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+                  valueComputed: (SELECT id FROM preference_questions WHERE field_name = 'excluded_ingredients')
+              - column:
+                  name: option_key
+                  value: NOTHING
+              - column:
+                  name: option_text
+                  value: Ничего не исключаю
+              - column:
+                  name: emoji
+                  value: "❌"
+              - column:
+                  name: is_default
+                  value: true
+              - column:
+                  name: sort_order
+                  value: 20

@@ -1,0 +1,13 @@
+FROM bellsoft/liberica-openjre-alpine:17.0.9
+
+RUN mkdir -p /app/uploads/images
+
+WORKDIR /app
+
+COPY target/*.jar app.jar
+
+COPY uploads/images/ /app/uploads/images/
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]

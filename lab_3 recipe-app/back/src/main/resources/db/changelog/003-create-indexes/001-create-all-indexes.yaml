@@ -1,0 +1,90 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-all-indexes
+      author: lama
+      changes:
+        - createIndex:
+            tableName: users
+            indexName: idx_users_email
+            columns: [{name: email}]
+        - createIndex:
+            tableName: users
+            indexName: idx_users_username
+            columns: [{name: username}]
+        - createIndex:
+            tableName: user_preferences
+            indexName: idx_user_preferences_user_id
+            columns: [{name: user_id}]
+        - createIndex:
+            tableName: ingredients
+            indexName: idx_ingredients_name
+            columns: [{name: name}]
+        - createIndex:
+            tableName: ingredients
+            indexName: idx_ingredients_category
+            columns: [{name: category_id}]
+        - createIndex:
+            tableName: ingredients
+            indexName: idx_ingredients_allergen
+            columns: [{name: is_allergen}]
+        - createIndex:
+            tableName: recipes
+            indexName: idx_recipes_name
+            columns: [{name: name}]
+        - createIndex:
+            tableName: recipes
+            indexName: idx_recipes_cuisine
+            columns: [{name: cuisine_type}]
+        - createIndex:
+            tableName: recipes
+            indexName: idx_recipes_vegetarian
+            columns: [{name: is_vegetarian}]
+        - createIndex:
+            tableName: recipes
+            indexName: idx_recipes_vegan
+            columns: [{name: is_vegan}]
+        - createIndex:
+            tableName: recipes
+            indexName: idx_recipes_gluten_free
+            columns: [{name: is_gluten_free}]
+        - createIndex:
+            tableName: recipe_ingredients
+            indexName: idx_recipe_ingredients_recipe
+            columns: [{name: recipe_id}]
+        - createIndex:
+            tableName: recipe_ingredients
+            indexName: idx_recipe_ingredients_ingredient
+            columns: [{name: ingredient_id}]
+        - createIndex:
+            tableName: user_recipe_history
+            indexName: idx_user_recipe_history_user
+            columns: [{name: user_id}]
+        - createIndex:
+            tableName: user_recipe_history
+            indexName: idx_user_recipe_history_matched
+            columns: [{name: matched_at}]
+        - createIndex:
+            tableName: user_sessions
+            indexName: idx_user_sessions_token
+            columns: [{name: session_token}]
+        - createIndex:
+            tableName: user_sessions
+            indexName: idx_user_sessions_user
+            columns: [{name: user_id}]
+        - createIndex:
+            tableName: user_sessions
+            indexName: idx_user_sessions_expires
+            columns: [{name: expires_at}]
+        - createIndex:
+            tableName: question_options
+            columns:
+              - column:
+                  name: question_id
+            indexName: idx_question_options_question_id
+
+        - createIndex:
+            tableName: question_options
+            columns:
+              - column:
+                  name: sort_order
+            indexName: idx_question_options_sort_order

@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - changeSet:
+      id: 013-insert-diet-types
+      author: lama
+      changes:
+        - insert:
+            tableName: diet_types
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: VEGETARIAN
+              - column:
+                  name: description
+                  value: Вегетарианское питание без мяса и рыбы
+        - insert:
+            tableName: diet_types
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: name
+                  value: VEGAN
+              - column:
+                  name: description
+                  value: Строго веганское питание без продуктов животного происхождения
+        - insert:
+            tableName: diet_types
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: name
+                  value: REGULAR
+              - column:
+                  name: description
+                  value: Обычное питание без ограничений
+        - insert:
+            tableName: diet_types
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: name
+                  value: NO_PREFERENCE
+              - column:
+                  name: description
+                  value: Без предпочтений в питании

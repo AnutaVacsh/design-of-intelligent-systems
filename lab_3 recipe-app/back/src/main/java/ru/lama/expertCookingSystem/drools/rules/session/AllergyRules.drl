@@ -1,0 +1,41 @@
+package ru.lama.expertCookingSystem.drools.rules.nutrition
+
+import ru.lama.expertCookingSystem.drools.facts.UserPreferencesFact
+import ru.lama.expertCookingSystem.drools.facts.RecipeFact
+
+// Правила исключения по аллергиям
+rule "Exclude Citrus for Citrus Allergy"
+    when
+        $prefs: UserPreferencesFact(allergies contains "citrus")
+        $recipe: RecipeFact(ingredients contains "цитрусовые")
+    then
+        retract($recipe);
+        System.out.println("Excluded recipe with citrus for allergy: " + $recipe.getName());
+end
+
+rule "Exclude Seafood for Seafood Allergy"
+    when
+        $prefs: UserPreferencesFact(allergies contains "seafood")
+        $recipe: RecipeFact(category == "SEAFOOD" || ingredients contains "морепродукты")
+    then
+        retract($recipe);
+        System.out.println("Excluded seafood recipe for allergy: " + $recipe.getName());
+end
+
+rule "Exclude Dairy for Lactose Intolerance"
+    when
+        $prefs: UserPreferencesFact(allergies contains "lactose")
+        $recipe: RecipeFact(ingredients contains "молоко" || ingredients contains "сыр" || ingredients contains "творог")
+    then
+        retract($recipe);
+        System.out.println("Excluded dairy recipe for lactose intolerance: " + $recipe.getName());
+end
+
+rule "Exclude Nuts for Nut Allergy"
+    when
+        $prefs: UserPreferencesFact(allergies contains "nuts")
+        $recipe: RecipeFact(ingredients contains "орехи" || ingredients contains "арахис")
+    then
+        retract($recipe);
+        System.out.println("Excluded nut recipe for allergy: " + $recipe.getName());
+end

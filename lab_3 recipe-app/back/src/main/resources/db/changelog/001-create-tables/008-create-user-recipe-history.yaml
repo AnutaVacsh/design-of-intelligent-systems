@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user-recipe-history-table
+      author: lama
+      changes:
+        - createTable:
+            tableName: user_recipe_history
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: recipe_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: matched_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: rating
+                  type: INTEGER

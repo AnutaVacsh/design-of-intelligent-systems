@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-check-constraints
+      author: lama
+      changes:
+        - sql:
+            sql: ALTER TABLE user_recipe_history ADD CONSTRAINT chk_user_recipe_history_rating CHECK (rating >= 1 AND rating <= 5)
+        - sql:
+            sql: ALTER TABLE recipes ADD CONSTRAINT chk_recipes_difficulty CHECK (difficulty_level IN ('Легко', 'Средне', 'Сложно'))

@@ -1,0 +1,447 @@
+package ru.lama.expertCookingSystem.drools.rules
+
+import ru.lama.expertCookingSystem.drools.facts.SessionFact
+import ru.lama.expertCookingSystem.drools.facts.AnswerFact
+import ru.lama.expertCookingSystem.drools.facts.QuestionFact
+import ru.lama.expertCookingSystem.drools.facts.UserPreferencesFact
+
+import java.util.Arrays
+
+// ========== ЕДИНЫЕ ПРАВИЛА С ПРОВЕРКОЙ АЛЛЕРГИЙ ==========
+
+rule "Process Exotic Preference With Allergy Check"
+    salience 100
+    when
+        $answer: AnswerFact(questionId == "exotic_preference", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "exotic_preference")
+        $pref: UserPreferencesFact()
+    then
+        System.out.println("=== ОБРАБОТКА ОТВЕТА 'ДА' НА ЭКЗОТИЧЕСКИЕ РЕЦЕПТЫ ===");
+        System.out.println("Сессия: " + $session.getSessionId());
+
+        // Проверяем аллергию на цитрусовые
+        if ($pref.getAllergies() != null && $pref.getAllergies().contains("citrus")) {
+            System.out.println("ОБНАРУЖЕНА АЛЛЕРГИЯ НА ЦИТРУСОВЫЕ - пропускаем вопрос");
+
+            AnswerFact citrusAnswer = new AnswerFact();
+            citrusAnswer.setSessionId($session.getSessionId());
+            citrusAnswer.setQuestionId("citrus_allergy");
+            citrusAnswer.setSelectedAnswers(Arrays.asList("yes"));
+            insert(citrusAnswer);
+
+            $session.setCurrentState("lactose_intolerance");
+            $session.setProgress(20);
+
+            insert(new QuestionFact(
+                "lactose_intolerance",
+                "У вас есть непереносимость лактозы?",
+                "SINGLE_SELECT",
+                Arrays.asList(
+                    new QuestionFact.AnswerOption("yes", "Да"),
+                    new QuestionFact.AnswerOption("no", "Нет")
+                )
+            ));
+
+            System.out.println("Пропущен вопрос citrus_allergy");
+        } else {
+            System.out.println("Аллергии на цитрусовые нет - задаем вопрос");
+
+            $session.setCurrentState("citrus_allergy");
+            $session.setProgress(10);
+
+            insert(new QuestionFact(
+                "citrus_allergy",
+                "У вас аллергия на цитрусовые?",
+                "SINGLE_SELECT",
+                Arrays.asList(
+                    new QuestionFact.AnswerOption("yes", "Да"),
+                    new QuestionFact.AnswerOption("no", "Нет")
+                )
+            ));
+        }
+        System.out.println("Переходим к: " + $session.getCurrentState());
+        retract($answer);
+end
+
+rule "Process Citrus Allergy With Lactose Check"
+    salience 100
+    when
+        $answer: AnswerFact(questionId == "citrus_allergy", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "citrus_allergy")
+        $pref: UserPreferencesFact()
+    then
+        System.out.println("=== ОБРАБОТКА ОТВЕТА 'ДА' НА АЛЛЕРГИЮ ЦИТРУСОВЫЕ ===");
+        System.out.println("Сессия: " + $session.getSessionId());
+
+        // Проверяем непереносимость лактозы
+        if ($pref.getAllergies() != null && $pref.getAllergies().contains("lactose")) {
+            System.out.println("ОБНАРУЖЕНА НЕПЕРЕНОСИМОСТЬ ЛАКТОЗЫ - пропускаем вопрос");
+
+            AnswerFact lactoseAnswer = new AnswerFact();
+            lactoseAnswer.setSessionId($session.getSessionId());
+            lactoseAnswer.setQuestionId("lactose_intolerance");
+            lactoseAnswer.setSelectedAnswers(Arrays.asList("yes"));
+            insert(lactoseAnswer);
+
+            $session.setCurrentState("seafood_allergy");
+            $session.setProgress(30);
+
+            insert(new QuestionFact(
+                "seafood_allergy",
+                "У вас есть аллергия на морепродукты?",
+                "SINGLE_SELECT",
+                Arrays.asList(
+                    new QuestionFact.AnswerOption("yes", "Да"),
+                    new QuestionFact.AnswerOption("no", "Нет")
+                )
+            ));
+
+            System.out.println("Пропущен вопрос lactose_intolerance");
+        } else {
+            System.out.println("Нет непереносимости лактозы - задаем вопрос");
+
+            $session.setCurrentState("lactose_intolerance");
+            $session.setProgress(20);
+
+            insert(new QuestionFact(
+                "lactose_intolerance",
+                "У вас есть непереносимость лактозы?",
+                "SINGLE_SELECT",
+                Arrays.asList(
+                    new QuestionFact.AnswerOption("yes", "Да"),
+                    new QuestionFact.AnswerOption("no", "Нет")
+                )
+            ));
+        }
+        System.out.println("Переходим к: " + $session.getCurrentState());
+        retract($answer);
+end
+
+rule "Process Lactose Intolerance With Seafood Check"
+    salience 100
+    when
+        $answer: AnswerFact(questionId == "lactose_intolerance", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "lactose_intolerance")
+        $pref: UserPreferencesFact()
+    then
+        System.out.println("=== ОБРАБОТКА ОТВЕТА 'ДА' НА НЕПЕРЕНОСИМОСТЬ ЛАКТОЗЫ ===");
+        System.out.println("Сессия: " + $session.getSessionId());
+
+        // Проверяем аллергию на морепродукты
+        if ($pref.getAllergies() != null &&
+            ($pref.getAllergies().contains("seafood_shellfish") || $pref.getAllergies().contains("seafood_fish"))) {
+            System.out.println("ОБНАРУЖЕНА АЛЛЕРГИЯ НА МОРЕПРОДУКТЫ - пропускаем вопрос");
+
+            AnswerFact seafoodAnswer = new AnswerFact();
+            seafoodAnswer.setSessionId($session.getSessionId());
+            seafoodAnswer.setQuestionId("seafood_allergy");
+            seafoodAnswer.setSelectedAnswers(Arrays.asList("yes"));
+            insert(seafoodAnswer);
+
+            $session.setCurrentState("truffle_oil");
+            $session.setProgress(40);
+
+            insert(new QuestionFact(
+                "truffle_oil",
+                "В блюде есть трюфельное масло?",
+                "SINGLE_SELECT",
+                Arrays.asList(
+                    new QuestionFact.AnswerOption("yes", "Да"),
+                    new QuestionFact.AnswerOption("no", "Нет")
+                )
+            ));
+
+            System.out.println("Пропущен вопрос seafood_allergy");
+        } else {
+            System.out.println("Нет аллергии на морепродукты - задаем вопрос");
+
+            $session.setCurrentState("seafood_allergy");
+            $session.setProgress(30);
+
+            insert(new QuestionFact(
+                "seafood_allergy",
+                "У вас есть аллергия на морепродукты?",
+                "SINGLE_SELECT",
+                Arrays.asList(
+                    new QuestionFact.AnswerOption("yes", "Да"),
+                    new QuestionFact.AnswerOption("no", "Нет")
+                )
+            ));
+        }
+        System.out.println("Переходим к: " + $session.getCurrentState());
+        retract($answer);
+end
+
+// ========== ПРОСТЫЕ ПРАВИЛА ДЛЯ ОБРАБОТКИ ОТВЕТОВ ==========
+
+rule "Process Citrus Allergy - No"
+    salience 100
+    when
+        $answer: AnswerFact(questionId == "citrus_allergy", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "citrus_allergy")
+    then
+        System.out.println("Обработка 'Нет' на аллергию цитрусовые");
+
+        $session.setCurrentState("oysters");
+        $session.setProgress(20);
+
+        insert(new QuestionFact(
+            "oysters",
+            "В блюде есть устрицы?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+        retract($answer);
+end
+
+rule "Process Lactose Intolerance - No"
+    salience 100
+    when
+        $answer: AnswerFact(questionId == "lactose_intolerance", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "lactose_intolerance")
+    then
+        System.out.println("Обработка 'Нет' на непереносимость лактозы");
+
+        $session.setCurrentState("nut_allergy");
+        $session.setProgress(30);
+
+        insert(new QuestionFact(
+            "nut_allergy",
+            "У вас аллергия на орехи?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+        retract($answer);
+end
+
+rule "Process Seafood Allergy - Yes"
+    salience 100
+    when
+        $answer: AnswerFact(questionId == "seafood_allergy", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "seafood_allergy")
+    then
+        System.out.println("Обработка 'Да' на аллергию морепродукты");
+
+        $session.setCurrentState("truffle_oil");
+        $session.setProgress(40);
+
+        insert(new QuestionFact(
+            "truffle_oil",
+            "В блюде есть трюфельное масло?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+        retract($answer);
+end
+
+rule "Process Seafood Allergy - No"
+    salience 100
+    when
+        $answer: AnswerFact(questionId == "seafood_allergy", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "seafood_allergy")
+    then
+        System.out.println("Обработка 'Нет' на аллергию морепродукты");
+
+        $session.setCurrentState("peanut_allergy");
+        $session.setProgress(40);
+
+        insert(new QuestionFact(
+            "peanut_allergy",
+            "У вас есть аллергия на арахис?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+        retract($answer);
+end
+
+rule "Process Truffle Oil - Yes"
+    salience 100
+    when
+        $answer: AnswerFact(questionId == "truffle_oil", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "truffle_oil")
+    then
+        System.out.println("Обработка 'Да' на трюфельное масло");
+
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(41L);
+        $session.setRecommendedRecipeName("Французский рататуй с трюфельным маслом");
+        retract($answer);
+end
+
+rule "Process Truffle Oil - No"
+    salience 100
+    when
+        $answer: AnswerFact(questionId == "truffle_oil", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "truffle_oil")
+    then
+        System.out.println("Обработка 'Нет' на трюфельное масло");
+
+        $session.setCurrentState("matcha");
+        $session.setProgress(50);
+
+        insert(new QuestionFact(
+            "matcha",
+            "В блюде есть матча?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+        retract($answer);
+end
+
+rule "Process Matcha - Yes"
+    salience 100
+    when
+        $answer: AnswerFact(questionId == "matcha", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "matcha")
+    then
+        System.out.println("Обработка 'Да' на матчу");
+
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(40L);
+        $session.setRecommendedRecipeName("Японские моти с зеленым чаем");
+        retract($answer);
+end
+
+rule "Process Matcha - No"
+    salience 100
+    when
+        $answer: AnswerFact(questionId == "matcha", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "matcha")
+    then
+        System.out.println("Обработка 'Нет' на матчу");
+
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(46L);
+        $session.setRecommendedRecipeName("Мороженое из жидкого азота");
+        retract($answer);
+end
+
+rule "Process Peanut Allergy - Yes"
+    salience 100
+    when
+        $answer: AnswerFact(questionId == "peanut_allergy", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "peanut_allergy")
+    then
+        System.out.println("Обработка 'Да' на аллергию арахис");
+
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(42L);
+        $session.setRecommendedRecipeName("Испанская паэлья с морепродуктами");
+        retract($answer);
+end
+
+rule "Process Peanut Allergy - No"
+    salience 100
+    when
+        $answer: AnswerFact(questionId == "peanut_allergy", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "peanut_allergy")
+    then
+        System.out.println("Обработка 'Нет' на аллергию арахис");
+
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(32L);
+        $session.setRecommendedRecipeName("Тайский суп Том Ям с креветками");
+        retract($answer);
+end
+
+rule "Process Nut Allergy - Yes"
+    salience 100
+    when
+        $answer: AnswerFact(questionId == "nut_allergy", selectedAnswers contains "yes")
+        $session: SessionFact(currentState == "nut_allergy")
+    then
+        System.out.println("Обработка 'Да' на аллергию орехи");
+
+        $session.setCurrentState("COMPLETED");
+        $session.setProgress(100);
+        $session.setSessionCompleted(true);
+        $session.setRecommendedRecipeId(45L);
+        $session.setRecommendedRecipeName("Немецкий шварцвальдский торт");
+        retract($answer);
+end
+
+rule "Process Nut Allergy - No"
+    salience 100
+    when
+        $answer: AnswerFact(questionId == "nut_allergy", selectedAnswers contains "no")
+        $session: SessionFact(currentState == "nut_allergy")
+    then
+        System.out.println("Обработка 'Нет' на аллергию орехи");
+
+        $session.setCurrentState("stracciatella");
+        $session.setProgress(40);
+
+        insert(new QuestionFact(
+            "stracciatella",
+            "В блюде есть страчателла?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+        retract($answer);
+end
+
+// ========== ПРАВИЛА ДЛЯ ВЕГЕТАРИАНСКОЙ ДИЕТЫ ==========
+
+rule "Skip Meat Questions - Strict Vegetarian Diet"
+    salience 100
+    when
+        $session: SessionFact(currentState == "dietary" || currentState == "meat" || currentState == "fish")
+        $pref: UserPreferencesFact(dietType == "vegetarian" || dietType == "vegan")
+        not AnswerFact(questionId == "meat")
+        not AnswerFact(questionId == "fish")
+    then
+        System.out.println("Пропуск вопросов о мясе/рыбе - вегетарианская диета");
+
+        AnswerFact meatAnswer = new AnswerFact();
+        meatAnswer.setSessionId($session.getSessionId());
+        meatAnswer.setQuestionId("meat");
+        meatAnswer.setSelectedAnswers(Arrays.asList("no"));
+        insert(meatAnswer);
+
+        AnswerFact fishAnswer = new AnswerFact();
+        fishAnswer.setSessionId($session.getSessionId());
+        fishAnswer.setQuestionId("fish");
+        fishAnswer.setSelectedAnswers(Arrays.asList("no"));
+        insert(fishAnswer);
+
+        $session.setCurrentState("vegetarian");
+        $session.setProgress(50);
+
+        insert(new QuestionFact(
+            "vegetarian",
+            "Блюдо вегетерианское?",
+            "SINGLE_SELECT",
+            Arrays.asList(
+                new QuestionFact.AnswerOption("yes", "Да"),
+                new QuestionFact.AnswerOption("no", "Нет")
+            )
+        ));
+end

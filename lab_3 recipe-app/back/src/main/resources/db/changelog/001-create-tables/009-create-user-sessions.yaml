@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user-sessions-table
+      author: lama
+      changes:
+        - createTable:
+            tableName: user_sessions
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  name: session_token
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: current_state
+                  type: VARCHAR(100)
+              - column:
+                  name: answers_data
+                  type: JSONB
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: expires_at
+                  type: TIMESTAMP WITH TIME ZONE

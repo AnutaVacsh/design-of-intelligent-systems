@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-ingredient-categories-table
+      author: lama
+      changes:
+        - createTable:
+            tableName: ingredient_categories
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(100)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: description
+                  type: TEXT

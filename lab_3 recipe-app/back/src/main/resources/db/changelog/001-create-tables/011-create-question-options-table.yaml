@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: 011-create-question-options-table
+      author: lama
+      changes:
+        - createTable:
+            tableName: question_options
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: question_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_question_options_question
+                    references: preference_questions(id)
+              - column:
+                  name: option_key
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: option_text
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: emoji
+                  type: VARCHAR(10)
+              - column:
+                  name: is_default
+                  type: BOOLEAN
+                  defaultValue: false
+              - column:
+                  name: sort_order
+                  type: INT
+                  defaultValue: 0
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP

@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-unique-constraints
+      author: lama
+      changes:
+        - addUniqueConstraint:
+            tableName: user_preferences
+            columnNames: user_id
+            constraintName: uk_user_preferences_user
+        - addUniqueConstraint:
+            tableName: recipe_ingredients
+            columnNames: recipe_id, ingredient_id, notes
+            constraintName: uk_recipe_ingredients
+        - addUniqueConstraint:
+            tableName: user_recipe_history
+            columnNames: user_id, recipe_id, matched_at
+            constraintName: uk_user_recipe_history
+        - addUniqueConstraint:
+            tableName: question_options
+            columnNames: question_id, option_key
+            constraintName: uk_question_options_key
+        - addUniqueConstraint:
+            tableName: ingredients
+            columnNames: name
+            constraintName: uk_ingredients_name

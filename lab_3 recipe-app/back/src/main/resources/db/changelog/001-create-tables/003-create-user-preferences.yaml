@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user-preferences-table
+      author: lama
+      changes:
+        - createTable:
+            tableName: user_preferences
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: diet_type_id
+                  type: INTEGER
+              - column:
+                  name: allergies
+                  type: TEXT[]
+              - column:
+                  name: preferred_ingredients
+                  type: TEXT[]
+              - column:
+                  name: excluded_ingredients
+                  type: TEXT[]
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP

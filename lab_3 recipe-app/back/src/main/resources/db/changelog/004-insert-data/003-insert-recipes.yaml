@@ -1,0 +1,922 @@
+databaseChangeLog:
+  - changeSet:
+      id: 014-insert-recipes
+      author: alina
+      changes:
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 1}
+              - column: {name: name, value: "Омлет классический"}
+              - column: {name: description, value: "Пышный и нежный омлет с молоком, идеальный завтрак для всей семьи. Готовится быстро и просто, получается воздушным и насыщенным. Традиционный рецепт, проверенный поколениями."}
+              - column: {name: instructions, value: "1. Взбейте 3 яйца с 130 мл молока и щепоткой соли до однородной массы\n2. Разогрейте сковороду с 1 ст.л. сливочного масла на среднем огне\n3. Вылейте яичную смесь на сковороду\n4. Готовьте 3-4 минуты под крышкой на небольшом огне\n5. Аккуратно сверните омлет пополам и подавайте горячим"}
+              - column: {name: prep_time, value: 5}
+              - column: {name: cook_time, value: 10}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "omelet_classic.jpg"}
+              - column: {name: servings, value: 2}
+              - column: {name: cuisine_type, value: "Русская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 2}
+              - column: {name: name, value: "Овсяная каша"}
+              - column: {name: description, value: "Питательная овсяная каша с маслом, идеальный здоровый завтрак. Нежная консистенция и приятный сливочный вкус. Отлично насыщает и дарит энергию на весь день."}
+              - column: {name: instructions, value: "1. 150 г овсяных хлопьев залейте 450 мл молока или воды\n2. Добавьте щепотку соли и 4 ч.л. сахара\n3. Варите на медленном огне 15-20 минут, постоянно помешивая\n4. В готовую кашу добавьте 20 г сливочного масла\n5. Подавайте с ягодами, орехами или медом"}
+              - column: {name: prep_time, value: 2}
+              - column: {name: cook_time, value: 10}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "oatmeal_porridge.jpg"}
+              - column: {name: servings, value: 2}
+              - column: {name: cuisine_type, value: "Русская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 3}
+              - column: {name: name, value: "Блинчики"}
+              - column: {name: description, value: "Тонкие ажурные блинчики на молоке - классика русской кухни. Золотистые, нежные, с хрустящими краями. Идеальны с вареньем, сметаной или икрой."}
+              - column: {name: instructions, value: "1. Взбейте 2 яйца с 2 ст.л. сахара и щепоткой соли\n2. Добавьте 500 мл молока и 200 г муки, перемешайте до гладкости\n3. Влейте 2 ст.л. растительного масла в тесто\n4. Разогрейте сковороду, смажьте маслом\n5. Выпекайте блинчики с двух сторон до золотистого цвета"}
+              - column: {name: prep_time, value: 15}
+              - column: {name: cook_time, value: 20}
+              - column: {name: difficulty_level, value: "Средне"}
+              - column: {name: image_url, value: "pancakes.jpg"}
+              - column: {name: servings, value: 4}
+              - column: {name: cuisine_type, value: "Русская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 4}
+              - column: {name: name, value: "Яичница глазунья"}
+              - column: {name: description, value: "Простая и вкусная яичница с сохранением целостности желтков. Быстрый завтрак, богатый белком. Идеально с тостами и свежими овощами."}
+              - column: {name: instructions, value: "1. Разогрейте сковороду с 1 ст.л. масла на среднем огне\n2. Аккуратно разбейте 2-3 яйца, не повредив желтки\n3. Посолите, поперчите по вкусу\n4. Готовьте 3-4 минуты на небольшом огне под крышкой\n5. Подавайте сразу же, пока желток остаётся жидким"}
+              - column: {name: prep_time, value: 2}
+              - column: {name: cook_time, value: 5}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "fried_eggs.jpg"}
+              - column: {name: servings, value: 1}
+              - column: {name: cuisine_type, value: "Международная"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 5}
+              - column: {name: name, value: "Творожная запеканка"}
+              - column: {name: description, value: "Нежная творожная запеканка с изюмом и ванилью. Пышная, ароматная, с золотистой корочкой. Отличный вариант для детского питания и диетического меню."}
+              - column: {name: instructions, value: "1. 600 г творога протрите через сито\n2. Добавьте 4 яйца, 4 ст.л. сахара, 4 ст.л. манки, 100 г сметаны\n3. Вмешайте 50 г изюма и ванилин\n4. Выложите в смазанную маслом форму\n5. Выпекайте 45 минут при 180°C до золотистой корочки"}
+              - column: {name: prep_time, value: 20}
+              - column: {name: cook_time, value: 40}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "cottage_cheese_casserole.jpg"}
+              - column: {name: servings, value: 6}
+              - column: {name: cuisine_type, value: "Русская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 6}
+              - column: {name: name, value: "Борщ"}
+              - column: {name: description, value: "Насыщенный борщ с говядиной и свеклой. Ароматный, с богатым вкусом и красивым рубиновым цветом. Традиционное блюдо, которое любят во многих семьях."}
+              - column: {name: instructions, value: "1. 500 г говядины варите 1.5 часа до готовности, посолите бульон\n2. Добавьте 4 нарезанных картофелины, варите 15 минут\n3. Обжарьте 2 луковицы, 2 моркови и 2 свеклы с 2 ст.л. томатной пасты\n4. Добавьте зажарку в бульон, варите 10 минут\n5. Добавьте 300 г шинкованной капусты, варите до готовности\n6. Поперчите по вкусу, подавайте со сметаной и свежим укропом"}
+              - column: {name: prep_time, value: 40}
+              - column: {name: cook_time, value: 120}
+              - column: {name: difficulty_level, value: "Сложно"}
+              - column: {name: image_url, value: "borscht.jpg"}
+              - column: {name: servings, value: 8}
+              - column: {name: cuisine_type, value: "Украинская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 7}
+              - column: {name: name, value: "Куриный суп с лапшой"}
+              - column: {name: description, value: "Лёгкий и ароматный куриный суп с домашней лапшой. Идеальное блюдо для простуды и холодных дней. Насыщенный бульон с нежным куриным мясом и овощами."}
+              - column: {name: instructions, value: "1. 400 г куриного филе варите 40 минут с 1 луковицей и 1 морковью\n2. Достайте мясо, бульон процедите\n3. Добавьте 4 нарезанных картофелины, варите 15 минут\n4. Добавьте 200 г вермишели, варите 7 минут\n5. Верните нарезанное мясо, посолите и поперчите по вкусу\n6. Подавайте со свежей зеленью"}
+              - column: {name: prep_time, value: 30}
+              - column: {name: cook_time, value: 60}
+              - column: {name: difficulty_level, value: "Средне"}
+              - column: {name: image_url, value: "chicken_noodle_soup.jpg"}
+              - column: {name: servings, value: 6}
+              - column: {name: cuisine_type, value: "Русская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 8}
+              - column: {name: name, value: "Грибной крем-суп"}
+              - column: {name: description, value: "Нежный грибной крем-суп с шампиньонами и сливками. Бархатистая текстура и насыщенный грибной аромат. Изысканное блюдо для уютного ужина."}
+              - column: {name: instructions, value: "1. 400 г шампиньонов обжарьте с 1 луковицей на сливочном масле\n2. Добавьте 1 л овощного бульона, варите 20 минут\n3. Погружным блендером измельчите суп до кремообразной консистенции\n4. Добавьте 200 мл сливок, прогрейте но не кипятите\n5. Посолите, поперчите по вкусу, добавьте свежую петрушку\n6. Подавайте сразу же"}
+              - column: {name: prep_time, value: 25}
+              - column: {name: cook_time, value: 30}
+              - column: {name: difficulty_level, value: "Средне"}
+              - column: {name: image_url, value: "mushroom_cream_soup.jpg"}
+              - column: {name: servings, value: 4}
+              - column: {name: cuisine_type, value: "Французская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 9}
+              - column: {name: name, value: "Солянка"}
+              - column: {name: description, value: "Насыщенный мясной суп с копченостями, солеными огурцами и каперсами. Яркий, пикантный вкус с кисло-солеными нотами. Традиционное русское блюдо для праздничного стола."}
+              - column: {name: instructions, value: "1. Варите бульон из 300 г говядины, 200 г свинины и 200 г курицы 1.5 часа\n2. Обжарьте 2 луковицы с 3 ст.л. томатной пасты\n3. Добавьте 4 нарезанных соленых огурца и 200 г копченостей\n4. Соедините с бульоном, добавьте 100 г оливок и 2 ст.л. каперсов\n5. Варите 15 минут, добавьте лавровый лист, дайте настояться\n6. Подавайте с долькой лимона"}
+              - column: {name: prep_time, value: 45}
+              - column: {name: cook_time, value: 90}
+              - column: {name: difficulty_level, value: "Сложно"}
+              - column: {name: image_url, value: "solyanka.jpg"}
+              - column: {name: servings, value: 8}
+              - column: {name: cuisine_type, value: "Русская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 10}
+              - column: {name: name, value: "Окрошка"}
+              - column: {name: description, value: "Освежающий холодный суп для жарких летних дней. Классическая окрошка на квасе с отварным мясом, свежими овощами и зеленью. Идеальный баланс вкусов и текстур."}
+              - column: {name: instructions, value: "1. Нарежьте кубиками 300 г отварной говядины, 4 картофелины, 3 яйца, 2 огурца\n2. Добавьте 100 г редиса, пучок зеленого лука и укропа\n3. Залейте 1 л хлебного кваса\n4. Добавьте 200 г сметаны, посолите по вкусу\n5. Тщательно перемешайте, охладите 2 часа\n6. Подавайте хорошо охлажденной"}
+              - column: {name: prep_time, value: 35}
+              - column: {name: cook_time, value: 0}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "okroshka.jpg"}
+              - column: {name: servings, value: 6}
+              - column: {name: cuisine_type, value: "Русская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 11}
+              - column: {name: name, value: "Плов из свинины"}
+              - column: {name: description, value: "Ароматный узбекский плов с нежной свининой, морковью и специями. Рис получается рассыпчатым, мясо - сочным, а тмин создает неповторимый восточный аромат."}
+              - column: {name: instructions, value: "1. 500 г свинины нарежьте кубиками, обжарьте до румяной корочки\n2. Добавьте 2 крупные моркови соломкой, обжаривайте 7 минут\n3. Влейте 100 мл растительного масла, добавьте 2 нарезанные луковицы\n4. Положите 1 ст.л. тмина, соль, перец\n5. Залейте 1 л воды, доведите до кипения\n6. Добавьте 500 г промытого риса, готовьте под крышкой 25 минут\n7. Перемешайте, дайте настояться 30 минут"}
+              - column: {name: prep_time, value: 30}
+              - column: {name: cook_time, value: 60}
+              - column: {name: difficulty_level, value: "Сложно"}
+              - column: {name: image_url, value: "pork_plov.jpg"}
+              - column: {name: servings, value: 6}
+              - column: {name: cuisine_type, value: "Узбекская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 12}
+              - column: {name: name, value: "Котлеты куриные"}
+              - column: {name: description, value: "Нежные куриные котлеты с луком и специями. Сочные внутри с аппетитной золотистой корочкой снаружи. Отлично подходят для детского питания и диетического меню."}
+              - column: {name: instructions, value: "1. 500 г куриного филе измельчите в фарш\n2. Добавьте 1 луковицу, 2 зубчика чеснока, 50 г белого хлеба, размоченного в 50 мл молока\n3. Вбейте 1 яйцо, посолите, поперчите, добавьте пучок укропа\n4. Сформируйте котлеты, обваляйте в 100 г панировочных сухарей\n5. Обжаривайте на растительном масле по 5-7 минут с каждой стороны\n6. Доведите до готовности в духовке 10 минут при 180°C"}
+              - column: {name: prep_time, value: 25}
+              - column: {name: cook_time, value: 20}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "chicken_cutlets.jpg"}
+              - column: {name: servings, value: 4}
+              - column: {name: cuisine_type, value: "Русская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 13}
+              - column: {name: name, value: "Гречка с тушенкой"}
+              - column: {name: description, value: "Сытное и простое блюдо - рассыпчатая гречка с ароматной говяжьей тушенкой. Идеальный вариант для походов, дачи или быстрого ужина. Насыщенный мясной вкус и питательность."}
+              - column: {name: instructions, value: "1. 400 г гречневой крупы обжарьте на сухой сковороде 3 минуты\n2. Залейте 800 мл кипятка, посолите, варите 15 минут\n3. Банку говяжьей тушенки (400 г) разогрейте на сковороде\n4. Обжарьте 1 луковицу на растительном масле и добавьте к тушенке\n5. Смешайте готовую гречку с тушенкой"}
+              - column: {name: prep_time, value: 10}
+              - column: {name: cook_time, value: 20}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "buckwheat_with_stew.jpg"}
+              - column: {name: servings, value: 4}
+              - column: {name: cuisine_type, value: "Русская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 14}
+              - column: {name: name, value: "Гуляш"}
+              - column: {name: description, value: "Густой мясной гуляш с говядиной в томатно-сметанном соусе. Нежное мясо, томленное с овощами и специями, подается с картофельным пюре или пастой. Венгерское блюдо, ставшее международной классикой."}
+              - column: {name: instructions, value: "1. 600 г говядины нарежьте кубиками, обжарьте на растительном масле до корочки\n2. Добавьте 2 луковицы, 1 морковь, обжаривайте 10 минут\n3. Влейте 2 ст.л. томатной пасты, добавьте 1 ст.л. муки\n4. Залейте 500 мл бульона, посолите, поперчите, тушите 1.5 часа под крышкой\n5. За 15 минут до готовности добавьте 200 г сметаны\n6. Подавайте горячим"}
+              - column: {name: prep_time, value: 25}
+              - column: {name: cook_time, value: 120}
+              - column: {name: difficulty_level, value: "Средне"}
+              - column: {name: image_url, value: "goulash.jpg"}
+              - column: {name: servings, value: 4}
+              - column: {name: cuisine_type, value: "Венгерская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 15}
+              - column: {name: name, value: "Бефстроганов"}
+              - column: {name: description, value: "Нежнейшая говядина в сливочном соусе с грибами - классика русской кухни. Тонко нарезанное мясо, томленное в сметанном соусе с луком и шампиньонами. Изысканное блюдо для праздничного стола."}
+              - column: {name: instructions, value: "1. 500 г говяжьей вырезки нарежьте тонкими полосками\n2. Быстро обжарьте мясо на растительном масле на сильном огне 2-3 минуты, посолите, поперчите\n3. Отдельно обжарьте 300 г шампиньонов с 2 луковицами\n4. Соедините мясо с грибами, добавьте 2 ст.л. томатной пасты\n5. Влейте 300 мл сметаны, тушите 15 минут на медленном огне\n6. Подавайте с картофельным пюре или рисом"}
+              - column: {name: prep_time, value: 30}
+              - column: {name: cook_time, value: 25}
+              - column: {name: difficulty_level, value: "Средне"}
+              - column: {name: image_url, value: "beef_stroganoff.jpg"}
+              - column: {name: servings, value: 4}
+              - column: {name: cuisine_type, value: "Русская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 16}
+              - column: {name: name, value: "Рыба в кляре"}
+              - column: {name: description, value: "Хрустящая рыба в воздушном кляре - простое и эффектное блюдо. Нежное филе в золотистой хрустящей корочке, сочное внутри. Отлично сочетается с картофелем фри и свежими овощами."}
+              - column: {name: instructions, value: "1. 500 г филе белой рыбы нарежьте порционными кусками\n2. Приготовьте кляр: 2 яйца, 100 г муки, 100 мл молока, соль, перец\n3. Разогрейте 500 мл растительного масла для фритюра до 180°C\n4. Обмакните куски рыбы в кляр, обжаривайте по 3-4 минуты с каждой стороны\n5. Выложите на бумажные полотенца для удаления лишнего масла\n6. Подавайте с лимоном и зеленью"}
+              - column: {name: prep_time, value: 20}
+              - column: {name: cook_time, value: 15}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "fish_in_batter.jpg"}
+              - column: {name: servings, value: 4}
+              - column: {name: cuisine_type, value: "Международная"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 17}
+              - column: {name: name, value: "Жареная картошка"}
+              - column: {name: description, value: "Ароматная жареная картошка с луком - простое и любимое блюдо многих. Золотистые хрустящие ломтики с нежной серединой, обжаренные с репчатым луком до идеальной корочки."}
+              - column: {name: instructions, value: "1. 1 кг картофеля очистите, нарежьте брусочками или дольками\n2. Промойте и хорошо обсушите полотенцем\n3. Разогрейте 4 ст.л. растительного масла на сковороде\n4. Обжаривайте картофель 15 минут до золотистого цвета\n5. Добавьте 2 нарезанные луковицы, жарьте еще 10 минут\n6. Посолите, поперчите, добавьте укроп перед подачей"}
+              - column: {name: prep_time, value: 15}
+              - column: {name: cook_time, value: 25}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "fried_potatoes.jpg"}
+              - column: {name: servings, value: 4}
+              - column: {name: cuisine_type, value: "Русская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: true}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 18}
+              - column: {name: name, value: "Овощное рагу"}
+              - column: {name: description, value: "Ароматное овощное рагу с кабачками, баклажанами и перцем. Яркое, полезное и сытное блюдо средиземноморской кухни. Идеально подходит для вегетарианского ужина и здорового питания."}
+              - column: {name: instructions, value: "1. 2 баклажана и 2 кабачка нарежьте кубиками, посолите\n2. Обжарьте 2 луковицы и 2 моркови на растительном масле, добавьте 2 болгарских перца\n3. Добавьте баклажаны и кабачки, обжаривайте 10 минут\n4. Влейте 400 г томатов в собственном соку, добавьте соль, перец, прованские травы\n5. Тушите под крышкой 25 минут на медленном огне\n6. В конце добавьте пучок базилика и 3 зубчика чеснока"}
+              - column: {name: prep_time, value: 25}
+              - column: {name: cook_time, value: 35}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "vegetable_stew.jpg"}
+              - column: {name: servings, value: 6}
+              - column: {name: cuisine_type, value: "Средиземноморская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: true}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 19}
+              - column: {name: name, value: "Макароны с сыром"}
+              - column: {name: description, value: "Нежные макароны в сливочном сырном соусе - комфортная еда, которую обожают и дети, и взрослые. Простое в приготовлении, но невероятно вкусное блюдо, которое всегда поднимает настроение."}
+              - column: {name: instructions, value: "1. 400 г макарон отварите в подсоленной воде до состояния аль денте\n2. Приготовьте сырный соус: растопите 50 г сливочного масла\n3. Добавьте 2 ст.л. муки, готовьте 2 минуты\n4. Влейте 500 мл молока, посолите, варите до загустения\n5. Добавьте 200 г тертого сыра чеддер, перемешайте\n6. Смешайте макароны с соусом, запеките 10 минут при 200°C"}
+              - column: {name: prep_time, value: 15}
+              - column: {name: cook_time, value: 25}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "mac_and_cheese.jpg"}
+              - column: {name: servings, value: 4}
+              - column: {name: cuisine_type, value: "Американская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 20}
+              - column: {name: name, value: "Картофельное пюре"}
+              - column: {name: description, value: "Нежное воздушное картофельное пюре с маслом и молоком. Классический гарнир, который идеально сочетается с мясом, рыбой и овощами. Секрет идеального пюре - в правильном соотношении картофеля и молочных продуктов."}
+              - column: {name: instructions, value: "1. 1 кг картофеля очистите, нарежьте крупными кусками\n2. Варите в подсоленной воде 20 минут до мягкости\n3. Слейте воду, подсушите картофель на слабом огне 2 минуты\n4. Разомните картофель, добавляя 100 г горячего молока\n5. Добавьте 100 г сливочного масла, взбивайте до воздушности\n6. Посолите по вкусу, подавайте сразу"}
+              - column: {name: prep_time, value: 15}
+              - column: {name: cook_time, value: 25}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "mashed_potatoes.jpg"}
+              - column: {name: servings, value: 6}
+              - column: {name: cuisine_type, value: "Русская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 21}
+              - column: {name: name, value: "Салат Оливье"}
+              - column: {name: description, value: "Классический салат Оливье - неизменный атрибут новогоднего стола и праздничных застолий. Нежное сочетание отварных овощей, мяса, яиц и майонеза. Любимый салат многих поколений с богатой историей."}
+              - column: {name: instructions, value: "1. Картофель и морковь отварите до готовности, очистите и нарежьте кубиками\n2. Колбасу или куриное филе нарежьте кубиками\n3. Яйца отварите вкрутую, очистите и нарежьте\n4. Соленые огурцы нарежьте мелкими кубиками\n5. Зеленый горошек слейте от жидкости\n6. Все ингредиенты смешайте в большой миске\n7. Заправьте майонезом, посолите по вкусу\n8. Украсьте укропом и охладите 2 часа перед подачей"}
+              - column: {name: prep_time, value: 40}
+              - column: {name: cook_time, value: 30}
+              - column: {name: difficulty_level, value: "Средне"}
+              - column: {name: image_url, value: "olivier_salad.jpg"}
+              - column: {name: servings, value: 8}
+              - column: {name: cuisine_type, value: "Русская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 22}
+              - column: {name: name, value: "Цезарь с курицей"}
+              - column: {name: description, value: "Знаменитый салат Цезарь с хрустящими крутонами, нежной куриной грудкой и пармезаном. Идеально сбалансированное блюдо с пикантным соусом на основе анчоусов и вустерского соуса."}
+              - column: {name: instructions, value: "1. Куриное филе нарежьте полосками, обжарьте до золотистой корочки\n2. Багет нарежьте кубиками, подсушите в духовке до хрустящих крутонов\n3. Салат романо промойте, обсушите и порвите руками\n4. Для соуса: смешайте желтки, горчицу, измельченные анчоусы и лимонный сок\n5. Медленно взбивая, влейте оливковое масло до эмульсии\n6. В большой миске смешайте салат с частью соуса\n7. Добавьте курицу и крутоны, аккуратно перемешайте\n8. Посыпьте тертым пармезаном, поперчите по вкусу"}
+              - column: {name: prep_time, value: 30}
+              - column: {name: cook_time, value: 15}
+              - column: {name: difficulty_level, value: "Средне"}
+              - column: {name: image_url, value: "caesar_salad.jpg"}
+              - column: {name: servings, value: 4}
+              - column: {name: cuisine_type, value: "Американская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 23}
+              - column: {name: name, value: "Овощной салат"}
+              - column: {name: description, value: "Свежий и легкий овощной салат с заправкой из оливкового масла и лимонного сока. Яркое сочетание сезонных овощей с хрустящей текстурой и насыщенным вкусом. Идеальный гарнир или самостоятельное диетическое блюдо."}
+              - column: {name: instructions, value: "1. 2 помидора нарежьте дольками\n2. 1 огурец нарежьте полукольцами\n3. 1 болгарский перец нарежьте соломкой\n4. 1 красную луковицу нарежьте тонкими полукольцами\n5. Добавьте пучок любой зелени (петрушка, укроп, базилик)\n6. Заправьте 3 ст.л. оливкового масла, соком 1/2 лимона\n7. Посолите, поперчите, аккуратно перемешайте"}
+              - column: {name: prep_time, value: 15}
+              - column: {name: cook_time, value: 0}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "vegetable_salad.jpg"}
+              - column: {name: servings, value: 4}
+              - column: {name: cuisine_type, value: "Средиземноморская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: true}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 24}
+              - column: {name: name, value: "Селедка под шубой"}
+              - column: {name: description, value: "Знаменитый слоеный салат с сельдью, овощами и майонезом. Сочетание соленой рыбы, сладкой свеклы и нежного картофеля создает уникальный вкусовой ансамбль. Традиционное блюдо для праздничного стола."}
+              - column: {name: instructions, value: "1. Филе соленой сельди нарежьте мелкими кусочками\n2. Картофель, морковь и свеклу отварите до готовности, очистите и натрите на крупной терке отдельно\n3. Лук нарежьте мелкими кубиками\n4. На дно салатника выложите слой картофеля, слегка смажьте майонезом\n5. Далее равномерно распределите сельдь\n6. Посыпьте луком и смажьте майонезом\n7. Следующий слой - морковь, смажьте майонезом\n8. Верхний слой - свекла, обильно смажьте майонезом\n9. Украсьте зеленью и охладите минимум 4 часа для пропитки"}
+              - column: {name: prep_time, value: 45}
+              - column: {name: cook_time, value: 60}
+              - column: {name: difficulty_level, value: "Средне"}
+              - column: {name: image_url, value: "herring_under_fur_coat.jpg"}
+              - column: {name: servings, value: 8}
+              - column: {name: cuisine_type, value: "Русская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 25}
+              - column: {name: name, value: "Греческий салат"}
+              - column: {name: description, value: "Классический греческий салат Хориатики с фетаксой, оливками и свежими овощами. Яркое сочетание вкусов Средиземноморья с оливковым маслом и орегано. Простота приготовления и насыщенный свежий вкус."}
+              - column: {name: instructions, value: "1. 3 помидора нарежьте крупными дольками\n2. 1 огурец нарежьте толстыми полукольцами\n3. 1 красную луковицу нарежьте тонкими кольцами\n4. 1 зеленый перец нарежьте соломкой\n5. Добавьте 100 г маслин Каламата и 200 г фетаксы кубиками\n6. Заправьте 4 ст.л. оливкового масла, 1 ч.л. орегано\n7. Посолите, поперчите, аккуратно перемешайте"}
+              - column: {name: prep_time, value: 20}
+              - column: {name: cook_time, value: 0}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "greek_salad.jpg"}
+              - column: {name: servings, value: 4}
+              - column: {name: cuisine_type, value: "Греческая"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 26}
+              - column: {name: name, value: "Шарлотка"}
+              - column: {name: description, value: "Нежный яблочный пирог шарлотка - классика домашней выпечки. Воздушный бисквит с ароматными яблоками и корицей. Простой в приготовлении, но всегда беспроигрышный десерт для семейного чаепития."}
+              - column: {name: instructions, value: "1. Четыре яйца взбейте со стаканом сахара до светлой пышной массы\n2. Аккуратно вмешайте стакан просеянной муки до однородности\n3. Яблоки очистите от кожуры и сердцевины, нарежьте тонкими дольками\n4. Форму для выпечки смажьте сливочным маслом\n5. Выложите яблоки на дно формы, посыпьте корицей\n6. Равномерно распределите тесто поверх яблок\n7. Выпекайте 40 минут в разогретой до 180°C духовке\n8. Готовность проверяйте деревянной зубочисткой - она должна выходить сухой"}
+              - column: {name: prep_time, value: 20}
+              - column: {name: cook_time, value: 40}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "charlotte_cake.jpg"}
+              - column: {name: servings, value: 8}
+              - column: {name: cuisine_type, value: "Русская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 27}
+              - column: {name: name, value: "Торт Наполеон"}
+              - column: {name: description, value: "Легендарный торт Наполеон с нежнейшими слоями теста и заварным кремом. Трудоемкий в приготовлении, но невероятно вкусный десерт, который стоит всех усилий. Хрустящие коржи и шелковистый крем создают идеальную гармонию."}
+              - column: {name: instructions, value: "1. Для теста: смешайте 500 г муки с 400 г охлажденного масла, добавьте 1 яйцо, щепотку соли и немного ледяной воды\n2. Замесите тесто, разделите на 8 частей, охладите 30 минут\n3. Каждую часть раскатайте в тонкий корж, выпекайте 10 минут при 200°C до золотистого цвета\n4. Для крема: 4 шт желтков разотрите с 200 г сахара, добавьте 100 г муки и немного молока\n5. Остальное молоко (900 мл) нагрейте, влейте желточную смесь, варите до загустения\n6. Добавьте ванилин, охладите крем\n7. Каждый корж пропитайте кремом, собирая торт\n8. Обсыпьте торт крошками из обрезков коржей\n9. Охладите минимум 8 часов для полной пропитки"}
+              - column: {name: prep_time, value: 90}
+              - column: {name: cook_time, value: 80}
+              - column: {name: difficulty_level, value: "Сложно"}
+              - column: {name: image_url, value: "napoleon_cake.jpg"}
+              - column: {name: servings, value: 12}
+              - column: {name: cuisine_type, value: "Французская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 28}
+              - column: {name: name, value: "Сырники"}
+              - column: {name: description, value: "Нежные творожные сырники с хрустящей корочкой и мягкой серединкой. Классический завтрак, который любят и дети, и взрослые. Подаются со сметаной, вареньем или свежими ягодами."}
+              - column: {name: instructions, value: "1. 500 г творога протрите через сито\n2. Добавьте 2 яйца, 3 ст.л. сахара, щепотку соли\n3. Всыпьте 5 ст.л. муки, перемешайте до однородности\n4. Сформируйте сырники, обваляйте в 3 ст.л. муки\n5. Обжаривайте на 4 ст.л. растительного масла на среднем огне по 4-5 минут с каждой стороны до золотистой корочки\n6. Подавайте горячими со 200 г сметаны"}
+              - column: {name: prep_time, value: 20}
+              - column: {name: cook_time, value: 15}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "syrniki.jpg"}
+              - column: {name: servings, value: 4}
+              - column: {name: cuisine_type, value: "Русская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 29}
+              - column: {name: name, value: "Печенье овсяное"}
+              - column: {name: description, value: "Домашнее овсяное печенье с изюмом и орехами - полезное и вкусное лакомство. Хрустящее снаружи и мягкое внутри, с насыщенным овсяным вкусом и ароматом корицы. Идеально к чаю или кофе."}
+              - column: {name: instructions, value: "1. 150 г сливочного масла размягчите, взбейте с 100 г сахара\n2. Добавьте 1 яйцо, 1 ч.л. ванилина\n3. Всыпьте 150 г овсяных хлопьев, 100 г муки, 1/2 ч.л. соды\n4. Добавьте 50 г изюма и 50 г грецких орехов\n5. Сформируйте печенье, выпекайте 15 минут при 180°C\n6. Остудите на решетке"}
+              - column: {name: prep_time, value: 20}
+              - column: {name: cook_time, value: 15}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "oatmeal_cookies.jpg"}
+              - column: {name: servings, value: 25}
+              - column: {name: cuisine_type, value: "Американская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 30}
+              - column: {name: name, value: "Вафли"}
+              - column: {name: description, value: "Хрустящие вафли в электровафельнице - ностальгический десерт из детства. Золотистые, ароматные, с нежной текстурой внутри. Подаются с вареньем, сгущенкой или свежими фруктами."}
+              - column: {name: instructions, value: "1. 3 яйца взбейте с 150 г сахара\n2. Добавьте 200 г растопленного сливочного масла\n3. Всыпьте 300 г муки, 1 ч.л. разрыхлителя, щепотку соли\n4. Влейте 200 мл молока, перемешайте до гладкости\n5. Разогрейте вафельницу, выпекайте по 3-4 минуты\n6. Сверните вафли трубочками пока горячие"}
+              - column: {name: prep_time, value: 15}
+              - column: {name: cook_time, value: 30}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "waffles.jpg"}
+              - column: {name: servings, value: 15}
+              - column: {name: cuisine_type, value: "Бельгийская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 31}
+              - column: {name: name, value: "Тартар из тунца с авокадо"}
+              - column: {name: description, value: "Изысканное блюдо из сырого тунца с кремовым авокадо и цитрусовыми нотами. Нежнейшая текстура, яркие вкусы и элегантная подача. Современная интерпретация классического тартара."}
+              - column: {name: instructions, value: "1. 300 г свежего тунца нарежьте мелкими кубиками\n2. 1 спелый авокадо разомните вилкой\n3. Смешайте тунец с авокадо, добавьте 1 ст.л. соевого соуса\n4. Добавьте сок 1/2 лайма, 1 ч.л. кунжутного масла\n5. Для чипсов: 1 лист лаваша нарежьте треугольниками, обжарьте в 2 ст.л. масла до хруста\n6. Тартар украсьте 1 ч.л. кунжута, горстью микрозелени и 1 ч.л. васаби\n7. Подавайте сразу с чипсами из лаваша"}
+              - column: {name: prep_time, value: 25}
+              - column: {name: cook_time, value: 0}
+              - column: {name: difficulty_level, value: "Средне"}
+              - column: {name: image_url, value: "tuna_tartare.jpg"}
+              - column: {name: servings, value: 2}
+              - column: {name: cuisine_type, value: "Японская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 32}
+              - column: {name: name, value: "Тайский суп Том Ям с креветками"}
+              - column: {name: description, value: "Ароматный тайский суп с креветками, грибами и кокосовым молоком. Идеальный баланс острого, кислого, соленого и сладкого. Насыщенный вкус лемонграсса, каффир-лайма и чили."}
+              - column: {name: instructions, value: "1. 1 л куриного бульона доведите до кипения\n2. Добавьте 2 стебля лемонграсса, цедру 1 лайма, 2 см имбиря, 3 зубчика чеснока\n3. Варите 10 минут, добавьте 200 г шампиньонов\n4. Добавьте 400 мл кокосового молока, 2 ст.л. соевого соуса, 1 ч.л. меда\n5. Положите 300 г креветок, варите 3 минуты\n6. Добавьте сок 2 лаймов, 2 перчика чили, горсть кинзы\n7. Подавайте горячим"}
+              - column: {name: prep_time, value: 20}
+              - column: {name: cook_time, value: 20}
+              - column: {name: difficulty_level, value: "Средне"}
+              - column: {name: image_url, value: "tom_yum_soup.jpg"}
+              - column: {name: servings, value: 4}
+              - column: {name: cuisine_type, value: "Тайская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 33}
+              - column: {name: name, value: "Кальмары в чернильном соусе"}
+              - column: {name: description, value: "Нежные кальмары в пикантном чернильном соусе - деликатес испанской кухни. Драматичный черный цвет и насыщенный морской вкус. Элегантное блюдо для особого случая."}
+              - column: {name: instructions, value: "1. 500 г кальмаров очистите, нарежьте кольцами\n2. В 3 ст.л. растительного масла обжарьте 1 нарезанную луковицу и 2 зубчика чеснока до мягкости\n3. Добавьте кальмары, жарьте 2 минуты, постоянно помешивая\n4. Влейте 100 мл белого вина, готовьте до полного выпаривания алкоголя\n5. Добавьте 2 ч.л. кальмаровых чернил, 200 мл рыбного бульона\n6. Посолите, поперчите по вкусу, тушите на медленном огне 15 минут\n7. Подавайте с отварным рисом (200 г сухого риса), украсьте петрушкой"}
+              - column: {name: prep_time, value: 30}
+              - column: {name: cook_time, value: 20}
+              - column: {name: difficulty_level, value: "Сложно"}
+              - column: {name: image_url, value: "squid_ink_squid.jpg"}
+              - column: {name: servings, value: 3}
+              - column: {name: cuisine_type, value: "Испанская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 34}
+              - column: {name: name, value: "Севиче из лосося с лаймом"}
+              - column: {name: description, value: "Свежий лосось, маринованный в цитрусовом соке с перцем чили и кинзой. Яркое перуанское блюдо с освежающим вкусом. Идеальная закуска для летнего ужина."}
+              - column: {name: instructions, value: "1. 400 г филе лосося нарежьте мелким кубиком\n2. Залейте соком 4 лаймов и 1 лимона\n3. Добавьте 1 мелко нарезанную красную луковицу, 1 чили (без семян), пучок кинзы\n4. Посолите 1/2 ч.л. соли, поперчите 1/4 ч.л. перца, аккуратно перемешайте\n5. Охладите в холодильнике 30 минут для маринования\n6. Подавайте с 1 нарезанным авокадо и 100 г кукурузы"}
+              - column: {name: prep_time, value: 20}
+              - column: {name: cook_time, value: 0}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "salmon_ceviche.jpg"}
+              - column: {name: servings, value: 3}
+              - column: {name: cuisine_type, value: "Перуанская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 35}
+              - column: {name: name, value: "Устрицы с цитрусовым соусом"}
+              - column: {name: description, value: "Свежие устрицы с элегантным цитрусовым соусом - классика французской кухни. Нежное мясо устриц с ярким акцентом лимона и табаско. Изысканная закуска для романтического ужина."}
+              - column: {name: instructions, value: "1. 12 свежих устриц аккуратно вскройте, сохраняя сок\n2. Приготовьте соус: смешайте сок 1 лимона, 1 ч.л. табаско, 1 ч.л. вустерского соуса\n3. Добавьте щепотку черного перца и щепотку морской соли\n4. Добавьте 1 ст.л. мелко нарезанного красного лука\n5. На сервировочное блюдо выложите слой колотого льда\n6. Разместите устрицы на льду, полейте соусом\n7. Украсьте дольками лимона и веточками петрушки\n8. Подавайте немедленно"}
+              - column: {name: prep_time, value: 15}
+              - column: {name: cook_time, value: 0}
+              - column: {name: difficulty_level, value: "Средне"}
+              - column: {name: image_url, value: "oysters_citrus.jpg"}
+              - column: {name: servings, value: 2}
+              - column: {name: cuisine_type, value: "Французская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 36}
+              - column: {name: name, value: "Рамен с яйцом пашот"}
+              - column: {name: description, value: "Насыщенный японский суп рамен с нежным яйцом пашот, свиной грудинкой и овощами. Ароматный бульон, приготовленный по традиционному рецепту с соевым соусом и мирином."}
+              - column: {name: instructions, value: "1. 1.5 л говяжьего бульона варите 30 минут с 3 см имбиря и 4 зубчиками чеснока\n2. Добавьте 100 мл соевого соуса, 50 мл мирина, варите еще 15 минут\n3. 400 г свинины запеките с 4 ст.л. соуса терияки до карамелизации\n4. 300 г лапши рамен отварите отдельно по инструкции\n5. 4 яйца пашот готовьте 4 минуты в кипящей воде с уксусом\n6. 100 г грибов шиитаке обжарьте до золотистости\n7. Соберите рамен: лапша, бульон, свинина, яйцо пашот, грибы\n8. Украсьте 4 стеблями зеленого лука, 2 листами нори и 100 г кукурузы"}
+              - column: {name: prep_time, value: 40}
+              - column: {name: cook_time, value: 60}
+              - column: {name: difficulty_level, value: "Сложно"}
+              - column: {name: image_url, value: "ramen_egg.jpg"}
+              - column: {name: servings, value: 4}
+              - column: {name: cuisine_type, value: "Японская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 37}
+              - column: {name: name, value: "Корейский пибимпап"}
+              - column: {name: description, value: "Корейское блюдо с рисом, обжаренной говядиной, овощами и яйцом. Яркое сочетание текстур и вкусов с пикантным соусом кочуджан. Подается в горячей каменной чаше."}
+              - column: {name: instructions, value: "1. 300 г говядины маринуйте 30 минут в смеси 3 ст.л. соевого соуса и 1 ст.л. кунжутного масла\n2. 200 г риса отварите до готовности\n3. Отдельно обжарьте в 3 ст.л. масла: 1 морковь соломкой, 150 г шпината, 100 г грибов шиитаке, 1 огурец соломкой, 50 г проростков\n4. Говядину обжарьте до готовности\n5. В горячую каменную чашу выложите рис, сверху разложите овощи и мясо по секторам\n6. Положите 2 жареных яйца, посыпьте 1 ст.л. кунжута и 2 стеблями зеленого лука\n7. Подавайте с 2 ст.л. соуса кочуджан, тщательно перемешивая перед едой"}
+              - column: {name: prep_time, value: 35}
+              - column: {name: cook_time, value: 20}
+              - column: {name: difficulty_level, value: "Средне"}
+              - column: {name: image_url, value: "bibimbap.jpg"}
+              - column: {name: servings, value: 2}
+              - column: {name: cuisine_type, value: "Корейская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 38}
+              - column: {name: name, value: "Вьетнамский суп Фо Бо"}
+              - column: {name: description, value: "Ароматный вьетнамский суп с говядиной, рисовой лапшой и свежими травами. Насыщенный бульон с звездчатым анисом, корицей и имбирем. Традиционное блюдо вьетнамской уличной еды."}
+              - column: {name: instructions, value: "1. 2 л говяжьего бульона варите 1 час с 2 луковицами, 5 см имбиря, 4 гвоздиками, 1 ч.л. кориандра и 1 ч.л. корицы\n2. Процедите бульон, приправьте солью по вкусу\n3. 200 г рисовой лапши залейте кипятком на 10 минут, слейте воду\n4. 300 г говяжьей вырезки нарежьте тончайшими ломтиками\n5. В глубокие миски разложите лапшу, сверху сырую говядину\n6. Залейте кипящим бульоном - говядина приготовится в горячем бульоне\n7. Подавайте с горстью кинзы, 4 стеблями зеленого лука, горстью базилика, 100 г ростков, 2 лаймами и 2 перчиками чили\n8. Добавляйте соевый соус по вкусу"}
+              - column: {name: prep_time, value: 40}
+              - column: {name: cook_time, value: 360}
+              - column: {name: difficulty_level, value: "Сложно"}
+              - column: {name: image_url, value: "pho_bo.jpg"}
+              - column: {name: servings, value: 6}
+              - column: {name: cuisine_type, value: "Вьетнамская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 39}
+              - column: {name: name, value: "Китайская утка по-пекински"}
+              - column: {name: description, value: "Легендарная утка по-пекински с хрустящей кожицей и нежным мясом. Традиционное блюдо китайской кухни, подается с тонкими блинчиками, луком и соусом хойсин."}
+              - column: {name: instructions, value: "1. 2 кг утки натрите смесью 4 ст.л. меда и 3 ст.л. соевого соуса\n2. Сушите 24 часа в прохладном проветриваемом месте для хрустящей кожицы\n3. Запекайте 2 часа при 180°C, затем 30 минут при 220°C до золотистой кожицы\n4. Тонко нарежьте мясо вместе с хрустящей кожицей\n5. 20 китайских лепешек подогрейте на пару\n6. Подавайте утку с лепешками, 6 стеблями зеленого лука, 2 огурцами и 100 мл соуса хойсин\n7. Каждую лепешку смазывайте соусом, добавляйте утку, лук и огурец, сворачивайте"}
+              - column: {name: prep_time, value: 1440}
+              - column: {name: cook_time, value: 150}
+              - column: {name: difficulty_level, value: "Сложно"}
+              - column: {name: image_url, value: "peking_duck.jpg"}
+              - column: {name: servings, value: 6}
+              - column: {name: cuisine_type, value: "Китайская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 40}
+              - column: {name: name, value: "Японские моти с зеленым чаем"}
+              - column: {name: description, value: "Нежные японские сладости моти с начинкой из мороженого матча. Мягкая рисовая оболочка и кремовая прохладная начинка. Традиционный десерт с современной интерпретацией."}
+              - column: {name: instructions, value: "1. 200 г мотико смешайте с 200 г сахарной пудры, 50 г сахара, 2 ч.л. матча и щепоткой соли\n2. Добавьте 200 мл воды, варите на паровой бане до прозрачности и эластичности\n3. Тесто охладите, затем раскатайте на 100 г кукурузного крахмала\n4. Вырежьте круги диаметром 10 см\n5. 500 мл мороженого матча размягчите при комнатной температуре 10 минут\n6. Сформируйте 12 шариков мороженого, быстро верните в морозилку\n7. Заверните шарики мороженого в круги моти, защипните края\n8. Заморозьте на 2 часа перед подачей"}
+              - column: {name: prep_time, value: 40}
+              - column: {name: cook_time, value: 15}
+              - column: {name: difficulty_level, value: "Сложно"}
+              - column: {name: image_url, value: "matcha_mochi.jpg"}
+              - column: {name: servings, value: 12}
+              - column: {name: cuisine_type, value: "Японская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 41}
+              - column: {name: name, value: "Французский рататуй с трюфельным маслом"}
+              - column: {name: description, value: "Изысканный овощной рататуй с трюфельным маслом - шедевр провансальской кухни. Тонко нарезанные овощи, запеченные с травами и ароматным трюфельным маслом. Визуально эффектное и невероятно вкусное блюдо."}
+              - column: {name: instructions, value: "1. 1 луковицу и 3 зубчика чеснока обжарьте в 1 ст.л. оливкового масла до мягкости\n2. Добавьте 2 ст.л. томатной пасты, тушите 5 минут - это основа\n3. 2 баклажана, 2 кабачка, 3 помидора нарежьте тонкими кружками одинакового диаметра\n4. В форму для запекания выложите томатную основу\n5. Сверху выложите овощи спиралью, чередуя баклажаны, кабачки и помидоры\n6. Полейте 1 ст.л. оливкового масла, посыпьте 1 ст.л. прованских трав, 1 ч.л. соли, 1/2 ч.л. перца\n7. Запекайте 45 минут при 180°C под фольгой\n8. Снимите фольгу, запекайте еще 15 минут до золотистого цвета\n9. Полейте 1 ч.л. трюфельного масла, украсьте базиликом перед подачей"}
+              - column: {name: prep_time, value: 35}
+              - column: {name: cook_time, value: 60}
+              - column: {name: difficulty_level, value: "Средне"}
+              - column: {name: image_url, value: "truffle_ratatouille.jpg"}
+              - column: {name: servings, value: 6}
+              - column: {name: cuisine_type, value: "Французская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: true}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 42}
+              - column: {name: name, value: "Испанская паэлья с морепродуктами"}
+              - column: {name: description, value: "Знаменитая испанская паэлья с морепродуктами, курицей и шафраном. Насыщенный вкус риса, впитавшего ароматы морепродуктов и специй. Традиционное блюдо валенсийской кухни."}
+              - column: {name: instructions, value: "1. В паэльере или широкой сковороде разогрейте 3 ст.л. оливкового масла\n2. Обжарьте 300 г курицы до золотистости, добавьте 1 нарезанный лук, 4 зубчика чеснока, 1 перец соломкой\n3. Добавьте 2 натертых помидора, готовьте 5 минут\n4. Всыпьте 400 г риса бомба, 1 ч.л. паприки, обжаривайте 2 минуты\n5. Влейте 1 л горячего рыбного бульона с щепоткой шафрана, 1 ч.л. соли, 1/2 ч.л. перца\n6. Через 10 минут равномерно разложите 200 г креветок и 100 г мидий\n7. Готовьте 20 минут на среднем огне без перемешивания\n8. Снимите с огня, дайте постоять 10 минут под полотенцем\n9. Украсьте петрушкой перед подачей"}
+              - column: {name: prep_time, value: 30}
+              - column: {name: cook_time, value: 40}
+              - column: {name: difficulty_level, value: "Сложно"}
+              - column: {name: image_url, value: "seafood_paella.jpg"}
+              - column: {name: servings, value: 6}
+              - column: {name: cuisine_type, value: "Испанская"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: true}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 43}
+              - column: {name: name, value: "Итальянская брускетта со страчателлой"}
+              - column: {name: description, value: "Итальянская закуска с хрустящим хлебом, нежнейшим сыром страчателла и свежими томатами. Сочетание текстур и вкусов Средиземноморья. Простота и элегантность в каждом кусочке."}
+              - column: {name: instructions, value: "1. 8 ломтиков чиабатты обжарьте на гриле или в тостере до золотистой корочки\n2. Горячий хлеб натрите 2 зубчиками чеснока, сбрызните 4 ст.л. оливкового масла\n3. 4 помидора нарежьте мелкими кубиками, смешайте с горстью измельченного базилика\n4. 200 г страчателлы аккуратно разберите на волокна, сохраняя кремовую текстуру\n5. На подготовленный хлеб выложите томатную смесь, затем сыр страчателла\n6. Посолите морской солью, поперчите свежемолотым перцем\n7. Украсьте рукколой и каплями бальзамического уксуса\n8. Подавайте немедленно"}
+              - column: {name: prep_time, value: 20}
+              - column: {name: cook_time, value: 10}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "burrata_bruschetta.jpg"}
+              - column: {name: servings, value: 4}
+              - column: {name: cuisine_type, value: "Итальянская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 44}
+              - column: {name: name, value: "Греческий мусака"}
+              - column: {name: description, value: "Слоеная греческая запеканка с баклажанами, мясным фаршем и соусом бешамель. Насыщенное блюдо с богатым вкусом и нежной текстурой. Кулинарный символ Греции."}
+              - column: {name: instructions, value: "1. 2 баклажана нарежьте кружками толщиной 1 см, обжарьте в 4 ст.л. масла до мягкости\n2. 500 г говяжьего фарша обжарьте с 2 луковицами и 3 зубчиками чеснока\n3. Добавьте 2 ст.л. томатной пасты, 2 нарезанных помидора, 1 ч.л. орегано, 1/2 ч.л. корицы, 1 ч.л. соли, 1/2 ч.л. перца, тушите 15 минут\n4. Для бешамеля: растопите 50 г масла, добавьте 50 г муки, готовьте 2 минуты\n5. Влейте 500 мл горячего молока, взбивайте до густоты, добавьте 1/4 ч.л. мускатного ореха\n6. В форму выложите слоями: половина баклажанов - весь фарш - оставшиеся баклажаны\n7. Залейте бешамелем, посыпьте 100 г тертого сыра\n8. Запекайте 45 минут при 180°C до золотистой корочки\n9. Дайте постоять 15 минут перед подачей"}
+              - column: {name: prep_time, value: 50}
+              - column: {name: cook_time, value: 60}
+              - column: {name: difficulty_level, value: "Сложно"}
+              - column: {name: image_url, value: "greek_moussaka.jpg"}
+              - column: {name: servings, value: 8}
+              - column: {name: cuisine_type, value: "Греческая"}
+              - column: {name: is_vegetarian, value: false}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 45}
+              - column: {name: name, value: "Немецкий шварцвальдский торт"}
+              - column: {name: description, value: "Знаменитый немецкий торт Шварцвальд с шоколадными бисквитами, вишней и взбитыми сливками. Насыщенный шоколадный вкус с кислинкой вишни и нежными сливками. Кулинарная легенда Германии."}
+              - column: {name: instructions, value: "1. 6 яиц взбейте с 200 г сахара до светлой пышной массы\n2. Аккуратно вмешайте 150 г просеянной муки, 50 г какао, 1 ч.л. разрыхлителя и 1 ч.л. ванилина\n3. Разделите тесто на 3 части, выпекайте коржи по 20 минут при 180°C\n4. 500 г вишни без косточек проварите с 100 г сахара до загустения, добавьте 4 ст.л. киршвассера\n5. 500 мл сливок взбейте с 50 г сахарной пудры до устойчивых пиков\n6. Коржи пропитайте вишневым сиропом\n7. Соберите торт: корж - половина вишни - треть сливок, повторите слои\n8. Верх и бока торта покройте оставшимися сливками\n9. Украсьте 100 г шоколадной стружки и 12 вишнями\n10. Охладите 4 часа перед подачей"}
+              - column: {name: prep_time, value: 60}
+              - column: {name: cook_time, value: 60}
+              - column: {name: difficulty_level, value: "Сложно"}
+              - column: {name: image_url, value: "black_forest_cake.jpg"}
+              - column: {name: servings, value: 12}
+              - column: {name: cuisine_type, value: "Немецкая"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 46}
+              - column: {name: name, value: "Мороженое из жидкого азота"}
+              - column: {name: description, value: "Супергладкое мороженое, приготовленное с использованием жидкого азота. Мгновенная заморозка создает невероятно кремовую текстуру без кристаллов льда. Современный молекулярный десерт."}
+              - column: {name: instructions, value: "МЕРЫ БЕЗОПАСНОСТИ: Работать только в хорошо проветриваемом помещении, использовать защитные очки, термостойкие перчатки и закрытую обувь. Не вдыхать пары азота!\n\n1. 500 мл сливок смешайте с 150 г сахара и 1 ч.л. ванилина, взбейте до мягких пиков\n2. 300 г яблок очистите, приготовьте пюре с соком 1 лимона\n3. В глубокой нержавеющей миске соедините сливки с фруктовым пюре\n4. МЕДЛЕННО вливайте 1 л жидкого азота тонкой струйкой, постоянно помешивая деревянной ложкой\n5. Продолжайте добавлять азот и перемешивать до желаемой консистенции мороженого\n6. ДАЙТЕ полностью испариться остаткам азота перед дегустацией!\n7. Подавайте сразу же, украсьте вареньем, орехами, взбитыми сливками и шоколадной стружкой"}
+              - column: {name: prep_time, value: 20}
+              - column: {name: cook_time, value: 5}
+              - column: {name: difficulty_level, value: "Сложно"}
+              - column: {name: image_url, value: "nitrogen_ice_cream.jpg"}
+              - column: {name: servings, value: 4}
+              - column: {name: cuisine_type, value: "Молекулярная"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 47}
+              - column: {name: name, value: "Чизкейк с розовой гималайской солью"}
+              - column: {name: description, value: "Нежный чизкейк Нью-Йорк с карамелью и розовой гималайской солью. Идеальный баланс сладости и солености. Шелковистая текстура и изысканное сочетание вкусов."}
+              - column: {name: instructions, value: "1. 200 г песочного печенья измельчите в крошку, смешайте с 100 г растопленного сливочного масла\n2. Выложите в разъемную форму диаметром 24 см, утрамбуйте дно и бока\n3. 600 г сливочного сыра взбейте с 200 г сахара до гладкости\n4. Добавьте по одному 3 яйца, затем 200 г сметаны, 1 ч.л. ванилина и щепотку соли\n5. Вылейте начинку на основу, разровняйте\n6. Выпекайте 60 минут на водяной бане при 160°C\n7. Выключите духовку, оставьте чизкейк внутри на 1 час\n8. Охладите полностью в холодильнике 6 часов или на ночь\n9. Украсьте 100 мл карамельного соуса, посыпьте 1 ч.л. розовой гималайской соли и взбитыми сливками"}
+              - column: {name: prep_time, value: 40}
+              - column: {name: cook_time, value: 90}
+              - column: {name: difficulty_level, value: "Средне"}
+              - column: {name: image_url, value: "pink_salt_cheesecake.jpg"}
+              - column: {name: servings, value: 10}
+              - column: {name: cuisine_type, value: "Американская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 48}
+              - column: {name: name, value: "Крем-брюле с лавандой"}
+              - column: {name: description, value: "Французский десерт крем-брюле с тонким ароматом лаванды. Нежная ванильная основа с хрустящей карамельной корочкой. Элегантное завершение трапезы."}
+              - column: {name: instructions, value: "1. 500 мл сливок нагрейте с 1 ст.л. сушеной лаванды до появления пузырьков по краям, не кипятите\n2. Снимите с огня, накройте и настаивайте 30 минут для аромата\n3. 5 желтков взбейте с 100 г сахара до светлой пены\n4. Процедите сливки через сито, удаляя лаванду\n5. Медленно влейте сливки в желтки, постоянно помешивая\n6. Добавьте 1 ч.л. ванилина, щепотку соли и 1/4 ч.л. мускатного ореха\n7. Разлейте по 6 формам для крем-брюле\n8. Запекайте на водяной бане 40 минут при 150°C до загустения\n9. Охладите до комнатной температуры, затем в холодильнике 4 часа\n10. Перед подачей посыпьте каждый крем по 1 ч.л. сахара\n11. Карамелизуйте горелкой до золотистой хрустящей корочки\n12. Украсьте цедрой лимона"}
+              - column: {name: prep_time, value: 30}
+              - column: {name: cook_time, value: 50}
+              - column: {name: difficulty_level, value: "Средне"}
+              - column: {name: image_url, value: "lavender_creme_brulee.jpg"}
+              - column: {name: servings, value: 6}
+              - column: {name: cuisine_type, value: "Французская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 49}
+              - column: {name: name, value: "Тирамису с матчей"}
+              - column: {name: description, value: "Итальянский тирамису с японским акцентом - бисквитные lady fingers пропитаны зеленым чаем матча вместо кофе. Нежный десерт с ярким цветом и изысканным вкусом."}
+              - column: {name: instructions, value: "1. Приготовьте пропитку: 3 ст.л. матча взбейте с 200 мл горячей воды, 2 ст.л. сахара и 4 ст.л. марсалы до растворения\n2. 3 желтка взбейте с 100 г сахара на водяной бане до побеления и увеличения объема\n3. Снимите с огня, продолжайте взбивать до остывания\n4. Добавьте 500 г маскарпоне и 1 ч.л. ванилина, перемешайте до гладкости\n5. 3 белка взбейте с щепоткой соли в крепкую пену\n6. Аккуратно соедините белки с кремом маскарпоне\n7. 24 печенья савоярди быстро обмакните в пропитку из матча\n8. Выложите в форму слой печенья, затем слой крема\n9. Повторите слои, завершив кремом\n10. Посыпьте 2 ст.л. матча пудры через сито\n11. Охладите 6 часов или на ночь\n12. Украсьте цедрой лайма перед подачей"}
+              - column: {name: prep_time, value: 35}
+              - column: {name: cook_time, value: 0}
+              - column: {name: difficulty_level, value: "Средне"}
+              - column: {name: image_url, value: "matcha_tiramisu.jpg"}
+              - column: {name: servings, value: 8}
+              - column: {name: cuisine_type, value: "Итало-японская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 50}
+              - column: {name: name, value: "Панна-котта с шафраном"}
+              - column: {name: description, value: "Итальянский десерт панна-котта с золотистым шафраном и кардамоном. Шелковистая текстура и изысканный восточный аромат. Элегантный и нежный десерт."}
+              - column: {name: instructions, value: "1. 10 г желатина залейте 50 мл холодной воды, оставьте на 10 минут для набухания\n2. 500 мл сливок нагрейте с щепоткой шафрана, 1/2 ч.л. кардамона и 1 ч.л. ванилина до появления пузырьков\n3. Добавьте 100 г сахара и щепотку соли, перемешайте до растворения\n4. Снимите с огня, добавьте набухший желатин, перемешайте до полного растворения\n5. Процедите через сито, удаляя шафрановые нити\n6. Разлейте по 6 формам, охладите 6 часов до полного застывания\n7. Для соуса смешайте 4 ст.л. меда с соком 1 лайма\n8. Перед подачей опустите формы в горячую воду на 10 секунд, переверните на тарелки\n9. Полейте медовым соусом, посыпьте 50 г рубленых фисташек и цедрой лимона"}
+              - column: {name: prep_time, value: 20}
+              - column: {name: cook_time, value: 10}
+              - column: {name: difficulty_level, value: "Легко"}
+              - column: {name: image_url, value: "saffron_panna_cotta.jpg"}
+              - column: {name: servings, value: 6}
+              - column: {name: cuisine_type, value: "Итальянская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: true}
+              - column: {name: is_dairy_free, value: false}
+
+        - insert:
+            tableName: recipes
+            columns:
+              - column: {name: id, value: 51}
+              - column: {name: name, value: "Тирамису с ягодами"}
+              - column: {name: description, value: "Летняя версия тирамису со свежими ягодами и лимонным курдом. Легкий и освежающий десерт с яркими фруктовыми нотами. Современная интерпретация классического рецепта."}
+              - column: {name: instructions, value: "1. Приготовьте лимонный курд: 3 желтка взбейте с 100 г сахара и цедрой 2 лимонов\n2. Добавьте сок 2 лимонов, готовьте на водяной бане до загустения\n3. Снимите с огня, добавьте 100 г холодного масла кусочками, перемешайте до гладкости, охладите\n4. 3 белка взбейте с щепоткой соли в крепкую пену\n5. 500 г маскарпоне взбейте с 100 г сахара и 1 ч.л. ванилина\n6. Аккуратно соедините белки с кремом маскарпоне\n7. 24 печенья савоярди смажьте лимонным курдом\n8. Выложите в форму слой печенья, затем слой 300 г ягод, затем слой крема\n9. Повторите слои, завершив кремом\n10. Украсьте 100 г свежих ягод, листочками мяты и посыпьте 2 ст.л. сахарной пудры\n11. Охладите 6 часов или на ночь перед подачей"}
+              - column: {name: prep_time, value: 40}
+              - column: {name: cook_time, value: 0}
+              - column: {name: difficulty_level, value: "Средне"}
+              - column: {name: image_url, value: "berry_tiramisu.jpg"}
+              - column: {name: servings, value: 8}
+              - column: {name: cuisine_type, value: "Итальянская"}
+              - column: {name: is_vegetarian, value: true}
+              - column: {name: is_vegan, value: false}
+              - column: {name: is_gluten_free, value: false}
+              - column: {name: is_dairy_free, value: false}

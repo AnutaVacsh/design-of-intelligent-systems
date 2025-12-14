@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-ingredients-table
+      author: lama
+      changes:
+        - createTable:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: category_id
+                  type: INTEGER
+              - column:
+                  name: is_allergen
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP

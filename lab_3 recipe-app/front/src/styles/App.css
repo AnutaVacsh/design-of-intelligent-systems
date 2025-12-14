@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+.App {
+  min-height: 100vh;
+}
+/* Глобальные стили курсоров */
+* {
+  cursor: default;
+}
+
+button,
+a,
+[onclick],
+[role="button"],
+.input-group,
+.selectable,
+.clickable {
+  cursor: pointer;
+}
+
+button:disabled,
+.disabled {
+  cursor: not-allowed;
+}
+
+/* Специфично для форм аутентификации */
+.auth-form button,
+.auth-link,
+.auth-switch span {
+  cursor: pointer;
+}
+
+.auth-form button:hover:not(:disabled) {
+  opacity: 0.9;
+}

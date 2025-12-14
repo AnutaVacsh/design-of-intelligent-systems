@@ -1,0 +1,7 @@
+package ru.lama.expertCookingSystem.drools.rules.nutrition
+
+rule "Test Allergy Rule"
+    when
+    then
+        System.out.println("Allergy rule fired");
+end
