@@ -19,4 +19,4 @@ https://docs.google.com/document/d/1If5s_80D3Bp7Xy58LGBuWwzLK1yqA6ODqMrXyYU065M/
 [lab_3 recipe-app](lab_3%20recipe-app)
 
 ### Практическая работа 4: Выходной материал
-[lab_4 Проектирование экспертной системы по приготовлению еды.docx](lab_4%20%CF%F0%EE%E5%EA%F2%E8%F0%EE%E2%E0%ED%E8%E5%20%FD%EA%F1%EF%E5%F0%F2%ED%EE%E9%20%F1%E8%F1%F2%E5%EC%FB%20%EF%EE%20%EF%F0%E8%E3%EE%F2%EE%E2%EB%E5%ED%E8%FE%20%E5%E4%FB.docx)
+https://docs.google.com/document/d/1-508dqa7J2SVplZzxW3Ub_FX6Ux_b1go/edit?usp=drive_web&ouid=100717700449480142981&rtpof=true
